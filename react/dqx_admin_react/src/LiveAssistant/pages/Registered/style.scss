@@ -1,0 +1,43 @@
+$check-color: #f0f0f0;
+$check-background: #1ac9b2;
+
+.registered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 540px;
+
+	.steps-content {
+		margin-top: 50px;
+
+		&-title {
+			color: #171717;
+			font-size: 24px;
+			margin-bottom: 54px;
+			text-align: center;
+		}
+	}
+
+	.cards-content {
+		margin-bottom: 48px;
+	}
+	
+	.login-form-button {
+		margin-top: 48px;
+		&:nth-of-type(2) {
+			margin-top: 0;
+		}
+	}
+
+	.code-btn {
+		color: $check-color;
+		background-color: $check-background;
+	}
+
+	.code-btn.ant-btn[disabled],
+	.code-btn.ant-btn[disabled]:hover {
+		color: rgba(0, 0, 0, 0.25);
+		background-color: #f5f5f5;
+	}
+}

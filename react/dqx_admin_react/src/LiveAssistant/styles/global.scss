@@ -1,0 +1,116 @@
+@import "./normalize.css";
+@import "~antd/dist/antd.css";
+
+$conten-padding: 24px;
+$content-margin: 24px;
+$conten-min-height: 280px;
+$conten-background: #fff;
+$content-margin-top: 8px;
+
+$date-margin-right: 8px;
+$button-margin-left: 8px;
+$table-margin-top: 24px;
+$spacing-margin-right: 20px;
+$spacing-margin-bottom: 40px;
+
+$row-margin: 32px;
+
+$danger-color: #ff0000;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.basic-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}
+
+.basic-layout-content {
+  padding: $conten-padding;
+  margin: $content-margin;
+  min-height: $conten-min-height;
+  background: $conten-background;
+
+  .header {
+    .ant-picker {
+      margin-right: $date-margin-right;
+    }
+    .ant-btn {
+      margin-left: $button-margin-left;
+    }
+  }
+  .content {
+    .ant-table {
+      margin-top: $table-margin-top;
+    }
+  }
+  .ant-table {
+    margin-top: $table-margin-top;
+  }
+}
+.antd-cp {
+  cursor: pointer;
+}
+
+.antd-mr {
+  margin-right: $spacing-margin-right;
+}
+.antd-ml8 {
+  margin-left: $button-margin-left;
+}
+.antd-mb {
+  margin-bottom: $spacing-margin-bottom;
+}
+.antd-mt {
+  margin-top: $content-margin-top;
+}
+.dis-flex-end{
+  display: flex;
+  justify-content: flex-end;
+}
+.dis-flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+.dis-flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+.dis-flex-center {
+  display: flex;
+  justify-content: center;
+}
+.antd-cdanger {
+  color: $danger-color;
+}
+.ant-modal-footer {
+  text-align: center;
+}
+
+.big-modal {
+  width: 50vw !important;
+  min-width: 950px;
+  .ant-row {
+    margin-bottom: 20px;
+  }
+}
+
+.ant-modal-confirm-body {
+  text-align: center;
+}
+.ant-modal-confirm-btns {
+  float: none !important;
+  text-align: center;
+}
+.ant-select-selection-placeholder,
+.ant-select-selection-item {
+  width: 100%;
+}
+.ant-message-error{
+  white-space: pre-line;
+}

@@ -1,0 +1,122 @@
+$code-color: #fff;
+$code-backgroun-color: #554DF7;
+$registered-title-color: #171717;
+$registered-input-width: 400px;
+$registered-item-margin-top: 14px;
+$registered-extra-color: #adadad;
+$registered-warp-header-height: 42px;
+$registered-warp-header-margi-left: 200px;
+
+.registered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	&-header {
+		height: $registered-warp-header-height;
+		margin-left: $registered-warp-header-margi-left;
+		align-self: start;
+	}
+	&-title {
+		color: $registered-title-color;
+		text-align: center;
+		font-size: 24px;
+		margin: 60px 0;
+	}
+  &-content {
+		width: 70%;
+		margin-top: 80px;
+	}
+	.ant-select,
+	.ant-input,
+	.ant-input-password {
+		width: $registered-input-width;
+	}
+	.steps-action {
+		display: flex;
+    justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		.ant-btn {
+			width: $registered-input-width;
+		}
+	}
+	.content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.ant-form {
+		width: 100%;
+	}
+	.item {
+		margin-top: $registered-item-margin-top;
+	}
+	.basic-messgae,
+	.real-name {
+		display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	}
+	.extra {
+		width: $registered-input-width;
+		color: $registered-extra-color;
+		p {
+			margin: 0;
+		}
+	}
+
+	.IDCards {
+		.upload-image {
+			margin-right: 32px;
+			margin-top: 32px;
+		}
+		.cards {
+			display: inline-flex;
+			flex-direction: column;	
+		}
+	}
+
+	.code {
+		.ant-form-item-control-input-content {
+			position: relative;
+		}
+		.ant-btn {
+			position: absolute;
+			left: 286px;
+			top: 4px;
+			border-radius: 8px;
+			color: $code-color;
+			background-color: $code-backgroun-color;
+		}
+	}
+
+	.ant-form-item {
+    display: flex;
+    justify-content: center;
+		align-items: center;
+	}
+
+	label {
+		display: inline-block;
+		width: 100px;
+		text-align: right;
+	}
+}
+
+.extar-idcrads {
+	color: $registered-extra-color;
+	font-size: 20px;
+	margin-top: $registered-item-margin-top;
+}
+
+@media screen and (max-width: 1200px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+	.registered {
+		.ant-form-item {
+			padding-left: 0;
+		} 
+	}        
+}

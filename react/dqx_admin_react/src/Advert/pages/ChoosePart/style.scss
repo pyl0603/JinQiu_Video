@@ -1,0 +1,41 @@
+.choose {
+	position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+	text-align: center;
+	.for-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+  }
+	.cp {
+		width: 340px;
+		height: 340px;
+    line-height: 340px;
+    background: hsla(0,0%,100%,.16);
+    border: 1px solid hsla(0,0%,67.8%,.1);
+		border-radius: 20px;
+		text-align: center;
+  }
+  .complete {
+    background: url('~@img/ic_jinqiu.png') no-repeat center;
+    background-size: 80px;
+  }
+  .simplify {
+    background: url('~@img/ic_jianhuaban.png') no-repeat center;
+    background-size: 80px;
+  }
+	span {
+		display: block;
+    text-align: center;
+    margin-top: 80px;
+    font-size: 24px;
+    color: #171717;
+	}
+}

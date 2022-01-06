@@ -1,0 +1,55 @@
+// 测试
+.list-margin {
+  margin-top: 5px;
+}
+.ant-modal {
+  width: 760px !important;
+}
+.ant-modal-body{
+    .modal-item{
+        margin-top: 10px;
+        i{
+            display: inline-block;
+            width: 80px;
+            font-style: normal;
+        }
+    }
+    .for-input .ant-input{
+        width: calc(100% - 120px);
+    }
+}
+.time-choose {
+  .ant-checkbox + span {
+    position: absolute;
+    z-index: 1;
+    margin-left: -24px;
+    display: inline-block;
+    width: 32px;
+    text-align: center;
+  }
+  .check-all .ant-checkbox + span {
+    position: relative;
+    margin-left: 0;
+    display: inline-block;
+    width: auto;
+    text-align: left;
+  }
+  // .ant-checkbox-wrapper span:last-child{
+  //   display: inline-block;
+  //   text-align: center;
+  //   width: 32px;
+  // }
+  .ant-checkbox-checked .ant-checkbox-inner::after {
+    opacity: 0;
+  }
+  .ant-checkbox-wrapper-checked span {
+    color: #fff;
+    text-align: center;
+  }
+  .check-all.ant-checkbox-wrapper-checked span {
+    color: #333;
+  }
+  .check-all .ant-checkbox-checked .ant-checkbox-inner::after {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,37 @@
+$registered-extra-color: #adadad;
+$registered-item-margin-top: 16px;
+
+.verified {
+		&-form {
+			label {
+				width: 100px;
+			}
+			.verified-IDCards {
+				font-size: 20px;
+				color: #424242;
+			}
+			.extar-idcrads {
+				display: inline-block;
+				color: $registered-extra-color;
+				font-size: 20px;
+				margin-top: $registered-item-margin-top;
+			}
+
+			.cards {
+				margin-right: 32px;
+				margin-top: 26px;
+			}
+		}
+    &-IDCards {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			.cards-content {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				align-items: flex-start;
+			}
+		}
+}

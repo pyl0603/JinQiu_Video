@@ -1,0 +1,21 @@
+export default {
+	'/': '首页',
+	'/commodity': '虚拟商品管理',
+	'/commodity/push': '发布虚拟商品',
+	'/commodity/manage': '管理虚拟商品',
+	'/commodity/recycle': '虚拟虚拟商品回收站',
+	'/order': '订单管理',
+	'/order/topup': '充值订单',
+	'/order/buy': '购买订单',
+	'/order/change': '转换订单',
+	'/bill': '账单管理',
+	'/bill/topup': '充值账单',
+	'/bill/buy': '购买账单',
+	'/bill/change': '转换账单',
+	'/withdrawal': '提现管理',
+	'/withdrawal/new': '新提现',
+	'/withdrawal/all': '所有提现',
+	'/withdrawal/expertProfit': '专家收益',
+	'/commodityLogs': '虚拟货币操作日志',
+	'/withdrawal/bonus': '奖励金'
+}

@@ -1,0 +1,60 @@
+$forget-warp-margin-top: 360px;
+$forget-input-width: 400px;
+$forget-title-font-size: 24px;
+$forget-title-color: #171717;
+$forget-item-margin: 14px;
+$forget-extra-color: #adadad;
+$forget-extra-font-size: 18px;
+$code-color: #fff;
+$code-backgroun-color: #554DF7;
+
+.forget-password,
+.settings-password {
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: $forget-warp-margin-top;
+	.ant-select,
+	.ant-input,
+	.ant-input-password,
+	.footer {
+		width: $forget-input-width;
+	}
+
+	.title {
+		font-size: $forget-title-font-size;
+		color: $forget-title-color;
+		font-weight:400;
+	}
+
+	.extra {
+		color: $forget-extra-color;
+		font-size: $forget-extra-font-size;
+	}
+
+	.item,
+	.footer {
+		margin-top: $forget-item-margin;
+	}
+
+	.content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.code {
+		position: relative;
+		.ant-btn {
+			position: absolute;
+			right: 6px;
+			top: 4px;
+			border-radius: 8px;
+			color: $code-color;
+			background-color: $code-backgroun-color;
+		}
+	}
+}

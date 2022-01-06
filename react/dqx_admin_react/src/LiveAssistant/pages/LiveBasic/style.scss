@@ -1,0 +1,32 @@
+.live-basic-form {
+	.man-non{
+		display: block;
+		text-align: center;
+	}
+	label {
+		width: 100px;
+		justify-content: flex-end;
+	}
+	.roomM-list {
+		padding: 26px 0;
+		border-top: 1px solid #eee;
+		&-avator {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			overflow: hidden;
+			img {
+				width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			}
+		}
+
+		&-name {
+			margin-left: 20px;
+		}
+	}
+	&-button {
+		text-align: center;
+	}
+}

@@ -1,0 +1,79 @@
+.ant-radio-group {
+  display: flex;
+}
+.special-radio {
+  .ant-radio-button-wrapper {
+    height: 70px;
+    width: calc((100% - 100px) / 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    em {
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bolder;
+    }
+  }
+}
+.spacing-radio {
+  .ant-radio-button-wrapper {
+    margin-right: 16px;
+  }
+}
+.remind-txt{
+    margin-left: 100px;
+    margin-top: -25px;
+    font-size: 12px;
+    color: #adadad;
+}
+.plans-status-icon{
+  position: absolute;
+  width: 90px;
+  right: 40px;
+  margin-top: -120px;
+  z-index: 9;
+}
+.succ-icon-left{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url('../../img/mz_l.png');
+  background-size: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.fail-icon-left{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url('../../img/wz_l.png');
+  background-size: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.succ-icon-right{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url('../../img/mz_r.png');
+  background-size: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.fail-icon-right{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: url('../../img/wz_r.png');
+  background-size: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.ant-radio-button-wrapper-disabled.ant-radio-button-wrapper-checked{
+  background-color: #554DF7;
+}

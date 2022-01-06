@@ -1,0 +1,17 @@
+.login-form {
+    .check-code {
+			position: relative;
+        .code-btn {
+          position: absolute;
+          right: 8px;
+          top: 4px;
+          border-radius: 7px;
+        }
+		}
+		&-btngroup {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			margin-bottom: 8px;
+		}
+}

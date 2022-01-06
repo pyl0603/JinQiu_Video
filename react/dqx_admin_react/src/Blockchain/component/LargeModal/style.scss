@@ -1,0 +1,41 @@
+$income-modal-table-margin-bottom: 54px;
+$income-modal-btn-width: 100px;
+$income-list-padding-top: 26px;
+$income-list-solid-bg: #eee;
+
+$income-modal-list-title-color: #171717;
+$income-modal-money-color: #3D5AFE;
+
+.income-modal {
+    &-table {
+			margin-bottom: $income-modal-table-margin-bottom;
+		}
+		
+		&-btn {
+			width: $income-modal-btn-width;
+		}
+
+		&-list {
+			position: relative;
+			padding-top: $income-list-padding-top;
+			&::before {
+				content: '';
+				display: block;
+				position: absolute;
+				left: -24px;
+				top: 0;
+				width: calc(100% + 48px);
+				height: 5px;
+				background-color: $income-list-solid-bg;
+			}
+		}
+
+		&-list-title {
+			font-size: 18px;
+			color: $income-modal-list-title-color;
+			font-weight: 500;
+			.income-modal-money {
+				color: $income-modal-money-color;
+			}
+		}
+}

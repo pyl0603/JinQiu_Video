@@ -1,0 +1,60 @@
+$person-binding-color: #554df7;
+$person-no-binding-color: #ADADAD;
+$person-binding-font-size: 16px;
+$person-input-width: 320px;
+$person-label-width: 80px;
+
+.person-settings {
+    display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		.person-avatar {
+			width: 30%;
+			display: flex;
+			justify-content: center;
+			margin-bottom: 100px;
+		}
+		.person-message {
+			display: flex;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+			align-items: flex-start;
+		}
+		.ant-select,
+		.ant-input,
+		.ant-input-password {
+			width: $person-input-width;
+		}
+		label {
+			display: inline-block;
+			width: $person-label-width;
+			text-align: right;
+			line-height: 2.5;
+		}
+		.item {
+			display: flex;
+			margin-top: 16px;
+		}
+		.person-button {
+			text-align: center;
+			margin-top: 64px;
+		}
+		
+		.person-binding {
+			color: $person-binding-color;
+			font-size: $person-binding-font-size;
+		}	
+		
+		.person-no-binding {
+			color: $person-no-binding-color;
+			font-size: $person-binding-font-size;
+			margin-top: 12px;
+		}
+		.apply-input {
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			flex-direction: column;
+		}
+}

@@ -1,0 +1,169 @@
+.person-live {
+  &-video {
+		// display: flex;
+		// align-items: center;
+    position: relative;
+    width: 856px;
+		height: 600px;
+		padding-top: 30px;
+		background: url('../../img/tv.png')no-repeat center;
+		background-size: 100% 100%;
+    video {
+      width: 760px;
+			height: 480px;
+			margin-left: 80px;
+    }
+    &-trailer {
+			width: 790px;
+      height: 480px;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #eeeeee;
+			margin-left: 35px;
+			position: relative;
+			margin-top: -485px;
+    }
+	}
+	.opt-video{
+		width: 70%;
+		margin-left: 20%;
+		display: flex;
+		height: 50px;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 6px;
+		span{
+			display: inline-block;
+			width: 90px;
+			height: 48px;
+			margin-left: 30px;
+			cursor: pointer;
+		}
+		.open{
+			background: url('../../img/ic_zhibo_open.png')no-repeat center;
+			background-size: 90px 48px;
+		}
+		.offline{
+			background: url('../../img/ic_zhibo_downcast.png')no-repeat center;
+			background-size: 90px 48px;
+		}
+		.stop{
+			background: url('../../img/ic_zhibo_stop.png')no-repeat center;
+			background-size: 90px 48px;
+		}
+		.rebroadcast{
+			background: url('../../img/ic_zhibo_play.png')no-repeat center;
+			background-size: 90px 48px;
+		}                                
+		.reFresh{
+			background: url('../../img/ic_zhibo_refresh.png')no-repeat center;
+			background-size: 90px 48px;
+		}
+	}
+  .ant-input {
+    max-width: 550px;
+  }
+  .ant-select {
+    max-width: 300px;
+  }
+}
+// 聊天组件
+.chat-area {
+  height: calc(100vh - 500px);
+  border: 1px solid #f0f0f0;
+  width: 535px;
+  padding: 0 20px;
+	overflow-y: scroll;
+	border-bottom: none;
+	&::-webkit-scrollbar {
+    display: none;
+  }
+  span.msg-items {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+	}
+	.zhubo{
+		color: #F84A38;
+	}
+	.fangguan{
+		color: #F7B904;
+	}
+	.yonghu{
+		color: #F36F0D;
+	}
+	.tips{
+		color: #1B69FB;
+	}
+}
+.chat-cont {
+  width: 536px;
+  textarea {
+    display: inline-block;
+		width: 438px;
+		border-right: none;
+  }
+  button {
+    width: 98px;
+    height: 68px;
+		background: rgba(26, 201, 178, 1);
+		color: #fff;
+		font-size: 22px;
+  }
+}
+.black-list{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	em:first-child{
+		width: 350px;
+	}
+	em:nth-child(2){
+		width: 50px;
+	}
+}
+// 顶部切换
+.header-type {
+	width: 535px;
+	display: flex;
+	align-items: flex-end;
+}
+.header-type .ant-col{
+	height: 60px;
+	background: #F0F0F0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.header-type .ant-col.on{
+	height: 70px;
+	background:#1AC9B2 ;
+	color: #ffffff;
+}
+.user-opt{
+	display: inline-block;
+	width: 200px;
+	height: 70px;
+	padding: 0 15px;
+	background: #ffffff;
+	border: 1px solid #ddd;
+	position: absolute;
+	z-index: 999;
+	box-shadow: 5px 5px 5px #ddd;
+	text-align: left;
+	// margin-left: 80px;
+	// font-size: 18px;
+	span.user-name{
+		display: block;
+		text-align: left;
+		padding: 5px 0;
+	}
+}
+.noneTab{
+	display: none;
+}

@@ -1,0 +1,66 @@
+
+$row-margin: 32px;
+
+.create-ad {
+	.content-change {
+		.ant-select {
+			width: 100%;
+		}
+
+		.ant-row {
+			margin-bottom: $row-margin;
+		}
+	}
+}
+
+.image-style {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 16px;
+}
+
+#file {
+	z-index: 99;
+	opacity: 0;
+}
+
+.uploader-warper {
+	display: flex;
+	background: #cecece;
+	box-sizing:  border-box;
+}
+
+.show-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.ant-upload.ant-upload-select-picture-card,
+.ant-upload-picture-card-wrapper,
+.ant-upload.ant-upload-select-picture-card > .ant-upload {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.uploader-warper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+	.remove {
+		position: absolute;
+		right: -14px;
+		top: -16px;
+		padding: 6px;
+	}
+}

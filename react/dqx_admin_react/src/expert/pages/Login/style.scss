@@ -1,0 +1,135 @@
+$login-padding: 40px;
+$background-color: #ffffff;
+
+$header-margin: 40px;
+
+$title-color: rgba(0, 0, 0, 0.85);
+$title-font-size: 24px;
+$title-font-weight: 400;
+
+$header-logo-width: 68px;
+$header-logo-height: $header-logo-width;
+
+$form-operate-color: #424242;
+
+$content-width: 420px;
+
+.login {
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	// overflow: auto;
+	// width: 500px;
+	// height: 480px;
+	padding: $login-padding;
+	background: $background-color;
+	border-radius: 16px;
+	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+
+
+	&-logo {
+		display: inline-block;
+		width: $header-logo-width;
+		height: $header-logo-height;
+		margin-bottom: 20px;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	
+	&-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+		margin-bottom: $header-margin;
+	}
+
+	&-title {
+    color: $title-color;
+    font-weight: $title-font-weight;
+    font-size: $title-font-size;
+	}
+
+	&-content {
+		width: $content-width;
+    margin: 0 auto;
+	}
+
+	&-form-button {
+		width: 100%;
+	}
+
+	&-form-operate {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		a {
+			color: $form-operate-color;
+		}
+	}
+
+	.tips {
+		display: inline-block;
+		font-size: 0.16rem;
+		color: #777777;
+
+		i {
+			color: #ff0000;
+			padding-right: 3px;
+		}
+	}
+}
+
+.login-form {
+	.check-code {
+		position: relative;
+
+		.code-btn {
+			position: absolute;
+			right: 8px;
+			top: 4px;
+			border-radius: 7px;
+		}
+	}
+
+	&-btngroup {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		margin-bottom: 8px;
+	}
+}
+
+.login-scan {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	.code {
+		display: inline-block;
+		// width: 220px;
+		// height: 220px;
+		margin: 10px 0;
+		// border: 1px solid;
+	  }
+	  .tips {
+		font-size: 0.16rem;
+		color: #777777;
+	  }
+}
+
+.tips_warning {
+	font-size: 16px;
+	font-weight: bolder;
+}
+
+@media screen and (max-width: 576px) {
+	.login-content {
+		width: 95%;
+	}
+}

@@ -1,0 +1,28 @@
+.site-layout-background {
+    background: #fff;
+    .user-info {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+        .avatar {
+					display: inline-flex;
+          width: 38px;
+					height: 38px;
+					margin-right: 6px;
+            img {
+            	width: 100%;
+							height: 100%;
+							border-radius: 50%;
+            }
+        }
+    }
+}
+
+.header-trigger {
+    height: 64px;
+    padding: 16px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s, padding 0s;
+}
+

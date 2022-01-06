@@ -1,0 +1,53 @@
+.live-settings {
+	&-content {
+		padding: 32px 0;
+	}
+
+	.basic-settings-form {
+		.content {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			.ant-form-item-label {
+				width: 70px;
+				margin-right: 12px;
+			}
+			.ant-input {
+				width: 586px;
+			}
+		}
+
+		&-button {
+			&-group {
+				text-align: center;
+			}
+			margin-top: 200px;
+		}
+
+		.default-cove,
+		.currentImg,
+		.ant-audit::after {
+			border-radius: 50%;
+		}
+	}
+
+	.login-form-button {
+		&-group {
+			text-align: center;
+		}
+
+		width: auto;
+		margin-top: 200px;
+	}
+
+	.ant-input,
+	.ant-input-password {
+		max-width: 400px;
+	}
+
+	.ant-form-item-label {
+		width: 100px;
+		margin-right: 12px;
+	}
+}

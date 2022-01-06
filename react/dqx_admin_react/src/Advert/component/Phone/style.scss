@@ -1,0 +1,49 @@
+.phone {
+	width: 442px;
+	height: 918px;
+	padding: 70px 43px;
+	background: url('~@img/img_phone.png') no-repeat center;
+	background-size: 100%;
+	transform: scale(0.85);
+	margin-top: -70px;
+	div{
+		margin-bottom: 10px;
+	}
+	.pop{
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: -100px;
+	}
+	.small{
+		display: flex;
+		justify-content: space-between;
+		img{
+			margin-left: 5px;
+		}
+	}
+
+	.post-list {
+		display: flex;
+		flex-direction: column;
+		img {
+			margin-right: 4px;
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	.live-pause {
+		position: absolute;
+		top: 50px;
+		left: -90px;
+		transform:rotate(90deg);
+	}
+
+	.phone-content {
+		position: relative;
+		margin-top: 82px;
+	}
+}
