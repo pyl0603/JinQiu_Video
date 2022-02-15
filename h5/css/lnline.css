@@ -1,0 +1,21 @@
+/***
+**==================== app内嵌页样式 ===================
+**/
+
+/*
+* 注销账号
+*/
+body{
+    color: #171717;
+}
+.logout {
+    padding: .42rem .3rem;
+    font-size: .3rem;
+    line-height: .6rem;
+    /* color: #424242; */
+}
+
+.regulations {
+    /* color: #171717; */
+    font-weight: 700;
+}

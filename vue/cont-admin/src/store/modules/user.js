@@ -7,7 +7,9 @@ const state = {
     name: '',
     avatar: '',
     roles: [],
-    user_id:''
+    user_id:'',
+    userInfo:{},
+
 }
 
 const mutations = {
@@ -25,19 +27,28 @@ const mutations = {
     },
     SET_ID: (state, roles) => {
         state.user_id = roles
-    }
+    },
+    SET_USERINFO: (state, userInfo) => {
+        state.userInfo = userInfo
+      }
 }
 
 const actions = {
     // user login
     login({ commit }, userInfo) {
-        const { username, password } = userInfo
+        const { phoneNumber, code } = userInfo
         return new Promise((resolve, reject) => {
-            login({ username: username.trim(), password: password }).then(response => {
+            login({ phoneNumber: phoneNumber.trim(), code: code }).then(response => {
                 const { data } = response
-                commit('SET_TOKEN', data.access_token)
-                setToken(data.access_token)
+        const { userInfo } = data
+                
+                commit('SET_TOKEN', data.userToken)
+                // setToken(data.userToken)
+        commit('SET_USERINFO',userInfo )
+        console.log(state.userInfo)
+
                 resolve()
+                // debugger
             }).catch(error => {
                 reject(error)
             })
@@ -47,27 +58,38 @@ const actions = {
     // get user info
     getInfo({ commit, state }) {
         return new Promise((resolve, reject) => {
-            getInfo(state.token).then(response => {
-                const { data } = response
+            // getInfo(state.token).then(response => {
+                // const { data } = response
 
-                if (!data) {
+                if (!state.userInfo) {
                     reject('Verification failed, please Login again.')
                 }
-                console.log(data)
-                const { roles, nickname, avatar_url,id } = data
+                const roles = ['EDITOR_INTERNAL_VIDEO', 'EDITOR_ZMT_VIDEO']
+                const { avatar,userId,nickname } = state.userInfo
+                const data = {
+                    name:nickname,
+                    avatar,
+                    userId,
+                    roles,
+                  }
+                  console.log(state.userInfo)
+                // console.log(data)
+                // const { roles, nickname, avatar_url,id } = data
                 // roles must be a non-empty array
-                if (!roles || roles.length <= 0) {
-                    reject('getInfo: roles must be a non-null array!')
-                }
+                // if (!roles || roles.length <= 0) {
+                //     reject('getInfo: roles must be a non-null array!')
+                // }
 
                 commit('SET_ROLES', roles)
                 commit('SET_NAME', nickname)
-                commit('SET_AVATAR', avatar_url)
-                commit('SET_ID', id)
+                commit('SET_AVATAR', avatar)
+                commit('SET_ID', userId)
                 resolve(data)
-            }).catch(error => {
-                reject(error)
-            })
+                
+            // }).catch(error => {
+            //     reject(error)
+            //     debugger
+            // })
         })
     },
 

@@ -24,26 +24,21 @@
           auto-complete="on"
         />
       </el-form-item>
-
-      <el-form-item prop="password">
+            <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="password"/>
+          <svg-icon icon-class="user"/>
         </span>
         <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="Password"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
+          ref="code"
+          v-model="loginForm.code"
+          placeholder="请输入验证码"
         />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
-        </span>
       </el-form-item>
+
+            <el-button
+        style="width:100%;margin-bottom:30px;"
+        @click="VerificationCode"
+      >{{ShowTime?'获取验证码':Time}}</el-button>
       <el-button
         :loading="loading"
         type="dqx-btn"
@@ -55,8 +50,9 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
-
+// import { validUsername } from "@/utils/validate";
+import { GetVerification } from '@/api/user'
+// import { TimelineItem } from 'element-ui';
 export default {
   name: "Login",
   data() {
@@ -64,8 +60,12 @@ export default {
       loginForm: {
         // 15705929646
         username: "",
-        password: ""
+        password: "",
+        code:'',
+
       },
+      ShowTime:true,
+      Time:0,
       loginRules: {
         username: [
           { required: true, trigger: "blur", validator: 'validateUsername' }
@@ -88,6 +88,17 @@ export default {
     }
   },
   methods: {
+    VerificationCode(){
+      this.ShowTime = false
+      
+      this.Time = 10
+       let timer = setInterval(()=>{
+         this.Time = this.Time -1
+         this.Time<=0?this.ShowTime = true:''
+       },1000)
+         this.ShowTime === true ? clearInterval(timer) :''
+      GetVerification(this.loginForm.username)
+    },
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";
@@ -98,11 +109,15 @@ export default {
         this.$refs.password.focus();
       });
     },
+   
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          this.$store.dispatch("user/login", this.loginForm).then(() => {
+          this.$store.dispatch("user/login", {
+            phoneNumber:this.loginForm.username,
+            code:this.loginForm.code
+          }).then(() => {
               // this.$router.push({ path: this.redirect || "/" });
               this.$router.push({path:'/'})
               this.loading = false;

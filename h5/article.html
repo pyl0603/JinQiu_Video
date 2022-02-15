@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <meta name="referrer" content="never">
+    <meta name="keywords" content="世界杯,欧洲杯,美洲杯,亚洲杯,欧冠,欧联杯,亚冠,英超,西甲,意甲,德甲,法甲,中超,国足">
+    <meta name="description" content="谈古论今，汇聚天下球事。【事事关心】回归足球本质，开心互动聊球，关注足球身边事，刷出足球新视角；【实事求是】不夸大，不造作，只求实，用独特观点感受足球另一面。">
+    <title>今球</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="article color-scheme" v-cloak>
+        <div class="article-content">
+            <div class="title">
+                <!-- 国足出线赔率降至20赔1，但头名晋级赔率高达1赔6 -->
+                {{data.title}}
+            </div>
+            <div class="art-user">
+                <img :src="data.avatarUrl" :onerror="defaultImg">
+                <div>
+                    <span>{{data.author}}</span>
+                    <em>{{data.time}}</em>
+                </div>
+            </div>
+            <div class="art-description" v-if="data.subhead !== ''">
+                <!-- 首战获胜的韩国队和中国队均只需在今晚赢球即可 确保出线更被看好。 -->
+                {{data.subhead}}
+            </div>
+            <div class="show-all">
+                <div class="art-content" ref="element" :style="artHeight">
+                    <div class="art-img" v-if="!isShowVideo && videoUrl !==''">
+                        <div class="art-icon" >
+                            <img @click="playVideo" src="./img/ic_video_play_start.png" alt=" ">
+                        </div>
+                        <img :src="coverImg">
+                    </div>
+                    <div class="art-video" v-show="isShowVideo && videoUrl !==''">
+                        <video ref="videoElement" :src="videoUrl" controls>
+                            你的浏览器不支持 <code>video</code> 标签.
+                        </video>
+                    </div>
+                    <div class="art" v-html="data.content">
+                        <!-- 虎扑1月11日讯
+                        今晚，中国队所在的亚洲杯C组的次轮小组赛即将打响。首战获胜的韩国队和中国队均只需在今晚赢球即可确保出线更被看好，两队的晋级赔率也明显低于另外两支球队。以英国机构日博的数据为例，韩国队的小组出线赔率仍为1000赔1（1.001），出局赔率则高达1赔100。排在韩国队之后的是中国队，出线赔率为20赔1（1.05），较开赛前的8赔1（1.125）有明显下降，出局赔率则从1赔5升至1赔8。 -->
+                    </div>
+                </div>
+                <div class="hiden-art" v-if="isMore">
+                    <img class="show-all" @click="getAllArticle" src="./img/ic_xiala.png " alt=" ">
+                    <div class="art-btn" @click="getDownload"><span>查看余下精彩内容</span></div>
+                </div>
+                <!-- <div class="hiden-half" v-if="isMore">
+                    <span class="show-all" @click="getAllArticle">>></span>
+                    <div class="see-all-btn" @click="goDownload">查看余下精彩内容</div>
+                </div> -->
+            </div>
+        </div>
+        <div class="block recommend" v-if="recommendData.length > 0">
+            <div class="block-title">
+                精彩推荐
+            </div>
+            <div class="recommend-item" v-for="item in recommendData" @click="getDownload">
+                <div class="item-content">
+                    <div class="item-title">{{item.title}}</div>
+                    <div class="item-desc">
+                        <div class="desc-source">
+                            <span v-if="item.source !== ''">{{item.source}}</span>
+                            <em>{{item.countComment}}条评论</em>
+                        </div>
+                        <span class="desc-create">{{item.time}}</span>
+                    </div>
+                </div>
+                <div class="item-img">
+                    <img :src="item.imageUrl">
+                </div>
+            </div>
+        </div>
+        <div class="block common">
+            <div class="block-title">最新评论</div>
+            <div class="common-content" v-if="commonData !== ''">
+                <img :src="evaUserAv">
+                <div class="content-desc">
+                    <span>{{nicknameReply}}</span>
+                    <em>{{timestampToTime(commonData.createdAt)}}</em>
+                    <p>{{commonData.content}}</p>
+                </div>
+            </div>
+            <div v-if="commonData === ''" class="common-no-content">
+                <!-- <img src="./img/img_circle_empty.png" alt=" "> -->
+                <span>暂无评论，快来抢占沙发吧</span>
+            </div>
+            <div v-if="commonData !== ''" class="common-more" @click="getDownload">
+                <span>查看精彩评论</span >
+            </div>
+        </div>
+        <div class="tips">
+            <div class="tips-left ">
+                <img src="./img/logos.png " alt=" ">
+                <div>
+                    <span>今球</span>
+                    <em>今天的足球篮球资讯你get了吗？</em>
+                </div>
+            </div>
+            <div class="tips-right">
+                <em @click="getDownload">打开</em>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/vue.js "></script>
+<script src="./js/axios.js"></script>
+<script src="./js/qs.js"></script>
+<script src="https://res.sharetrace.com/sharetrace.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            data: [],            // 文章数据
+            recommendData: [],   // 推荐数据
+            commonData: '',      // 评论数据
+            evaUserAv: '',       // 评论人头像
+            nicknameReply: '',   // 评论人名称
+            defaultImg: 'this.src="./img/def_nav_portrait.png "',  // 默认头像
+            artHeight: '',       // 浏览器显示文章
+            coverImg: '',        // 封面图片
+            videoUrl: '',        // 视频播放地址
+            isMore: false,       // 是否查看更多
+            isShowVideo: false,  // 是否有视频
+            isPlay: false        // 是否播放
+        },
+        computed: {
+        },
+        methods: {
+            // 格式化时间
+            timestampToTime(timestamp) {
+                var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                var Y = date.getFullYear() + '-';
+                var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
+                var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+                var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+                var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+                return Y + M + D + h + m + s;
+            },
+            // 查看全部内容
+            getAllArticle() {
+               let _height = window.getComputedStyle(this.$refs.element).height;
+               this.artHeight = 'height:100%;'
+               this.isMore = false
+            },
+            // 下载
+            getDownload() {
+                ShareTrace.download();
+                // window.location.href = 'https://api.jinqiulive.com/download/app'
+            },
+            // 获取链接中的参数
+            getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                var q = window.location.pathname.substr(1).match(reg_rewrite);
+                if (r != null) {
+                    return unescape(r[2]);
+                } else if (q != null) {
+                    return unescape(q[2]);
+                } else {
+                    return null;
+                }
+            },
+            // 播放视频
+            playVideo() {
+                this.$refs.videoElement.play()
+                this.isShowVideo = true
+                this.isPlay = true
+            }
+        },
+        created() {
+            ShareTrace.init('40d971496992a319');
+        },
+        mounted() {
+            let id = this.getQueryString('id')
+            // let id = 14516
+            axios.get(`https://api.jinqiulive.com/client-app/article/detail?id=${id}`).then(res => {
+                this.data = res.data.data
+                this.coverImg = this.data.imageUrl
+                this.videoUrl = this.data.videoUrl
+                console.log(this.data)
+            }).catch(err => {
+                console.log(err)
+            })
+
+            axios.get(`https://api.jinqiulive.com/client-app/article/recommend?id=${id}`).then(res => {
+                this.recommendData = res.data.data
+                console.log(this.recommendData)      
+            }).catch(err => {
+                console.log(err)
+            })
+
+            axios.get(`https://api.jinqiulive.com/client-app/comments?type=4&target=${id}`).then(res => {
+                if(res.data.data.length > 0) {
+                    this.commonData = res.data.data[0]
+                    this.commonData.createdAt = this.timestampToTime(this.commonData.createdAt);
+                    this.nicknameReply = this.commonData.author.nickname
+                    this.evaUserAv = this.commonData.author.avatar
+                    console.log(this.commonData)   
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        watch: {
+            data(newVal) {
+                this.$nextTick(_ => {
+                    let _height = window.getComputedStyle(this.$refs.element).height.substring(0, window.getComputedStyle(this.$refs.element).height.length - 2);
+                    console.log(_height)
+                    if (_height > 720) {
+                        this.artHeight = 'height: 12.72rem;'
+                        this.isMore = true;
+                    }
+                })
+            }
+        }
+    })
+</script>
+</html>
