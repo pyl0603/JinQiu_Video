@@ -1,0 +1,41 @@
+
+
+
+按钮
+
+.el-button--dqx-btn,
+.el-button--dqx-btn {
+    background: #18ce94;
+    color: #fff;
+    border: 1px solid #18ce94;
+    cursor: pointer;
+}
+
+.el-button--dqx-btn:focus,
+.el-button--dqx-btn:hover,
+.el-button--dqx-btn:active {
+    background: #07ab77;
+    color: #fff;
+    border: 1px solid #07ab77;
+    cursor: pointer;
+}
+
+.isLq .el-button--dqx-btn,
+.isLq .el-button--dqx-btn {
+    background: #fbc31f;
+    color: #171717;
+    border: 1px solid #fbc31f;
+    cursor: pointer;
+}
+
+.isLq .el-button--dqx-btn:focus,
+.isLq .el-button--dqx-btn:hover,
+.isLq .el-button--dqx-btn:active {
+    background: #fbc31f;
+    color: #171717;
+    border: 1px solid #fbc31f;
+    cursor: pointer;
+}
+
+/* 对齐方式 */
+
