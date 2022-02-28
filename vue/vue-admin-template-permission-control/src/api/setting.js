@@ -432,3 +432,12 @@ export function VersionUpdate(parmas) {
         data:parmas
     })
 }
+
+
+export function getSystemLog(parmas) {
+    return request({
+        url: `/cloud-admin/system/log/${parmas.pageNum}/${parmas.pageSize}`,
+        method: 'get',
+        
+    })
+}

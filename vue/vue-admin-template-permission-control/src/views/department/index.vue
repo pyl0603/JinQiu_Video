@@ -1,7 +1,7 @@
 <template>
   <div class="department">
     <div class="new-tab tar">
-      <el-button type="dqx-btn" @click="permissionList">权限</el-button>
+      <el-button type="dqx-btn" @click="s">权限</el-button>
       <el-button type="dqx-btn" @click="roleList">角色</el-button>
       <el-button type="dqx-btn" @click="addDepart">新增部门</el-button>
     </div>
@@ -99,12 +99,20 @@
       :show-close="false"
     >
       <div>
-        部门名称：
-        <el-input
+        <el-row type="flex">
+          <el-col :span="2" style="marginTop:.8rem">
+             <i>部门名称：</i>
+          </el-col>
+          <el-col>
+<el-input
           v-model="dtoAddDept.deptName"
           v-inputRule
           maxlength="20"
         ></el-input>
+          </el-col>
+        </el-row>
+       
+        
       </div>
       <!-- <div class="mt20" v-if="dialogStatus==='create'">
         角色名称：
@@ -171,7 +179,7 @@
           <el-row type="flex" class="mt20">
             <el-col :span="2" style="lineHeight:250%">角色权限：</el-col>
             <el-col>
-              <el-select
+              <!-- <el-select
                 v-model="roleAddParmas.permissionIds"
                 multiple
                 collapse-tags
@@ -184,7 +192,15 @@
                   :value="item.id"
                 >
                 </el-option>
-              </el-select>
+              </el-select> -->
+
+              <el-cascader
+                @change="change"
+                :value="roleAddParmas.permissionIds"
+                :options="options"
+                :props="{ multiple: true, checkStrictly: true }"
+                clearable
+              ></el-cascader>
             </el-col>
           </el-row>
         </el-col>
@@ -229,13 +245,43 @@
         </el-table-column>
       </el-table>
     </el-dialog>
-    <el-dialog title="权限" :visible.sync="dialogTableVisibleSystem">
+    <el-dialog title="权限" width="30%" :visible.sync="dialogTableVisibleSystem">
+      <el-dialog width="30%" :visible.sync="innerVisible" append-to-body>
+        <el-table
+          :data="permissionLists ? permissionLists.childPermission : ''"
+        >
+          <el-table-column
+            property="id"
+            label="ID"
+            width="150"
+          ></el-table-column>
+          <el-table-column
+            property="name"
+            label="权限"
+            width="200"
+          ></el-table-column>
+          <el-table-column fixed="right" label="操作" width="120">
+            <template slot-scope="scope">
+              <el-button
+                @click.native.prevent="permissionDlete(scope.$index, scope.row)"
+                type="text"
+                size="small"
+              >
+                删除
+              </el-button>
+              <el-button
+                @click.native.prevent="permissionEdits(scope.$index, scope.row)"
+                type="text"
+                size="small"
+              >
+                编辑
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-dialog>
       <el-table :data="gridDataSystem">
-        <el-table-column
-          property="id"
-          label="ID"
-          width="150"
-        ></el-table-column>
+        <el-table-column property="id" label="ID" width="150"></el-table-column>
         <el-table-column
           property="name"
           label="权限"
@@ -261,6 +307,42 @@
         </el-table-column>
       </el-table>
     </el-dialog>
+    <el-dialog title="编辑权限" :visible.sync="dialog">
+      <el-row>
+        <el-col>
+          <el-row type="flex">
+            <el-col :span="2" style="marginTop:.8rem">
+              <i>权限名称：</i>
+            </el-col>
+            <el-col>
+              <el-input
+                v-model="dto.name"
+                placeholder="请输入权限名"
+              ></el-input>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col class="mt20">
+          <el-row type="flex">
+            <el-col :span="2" style="marginTop:.8rem">
+              <i >权限标识：</i>
+            </el-col>
+            <el-col>
+              <el-input
+                v-model="dto.frontMark"
+                placeholder="请输入权限标识"
+              ></el-input>
+            </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialog = false">取 消</el-button>
+        <el-button type="primary" @click="editPermission"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -284,6 +366,9 @@ import {
 export default {
   data() {
     return {
+      dialog: false,
+      permissionLists: [],
+      innerVisible: false,
       dialogTableVisibleSystem: false,
       gridDataSystem: [],
       Edit: false,
@@ -320,32 +405,73 @@ export default {
       getSystemDeptParmas: {
         pageNum: 1,
         pageSize: 10
+      },
+      parentId: [],
+      dto: {
+        afterMark: "",
+        frontMark: "",
+        id: null,
+        name: "",
+        parentId: null
       }
     };
   },
   methods: {
-    permissionEdit(){
-
+    permissionEdits(i, item) {
+      console.log(item);
+      this.dialog = true;
+      this.dto.id = item.id;
+      this.dto.name = item.name
+      this.dto.afterMark = item.afterMark;
     },
-    async permissionDlete (i,item){
-      console.log(i,item);
-      const res = await deletesystemPermission(item.id)
+    change(val) {
+      // let newVal = [];
+      // this.roleAddParmas.permissionIds.map(item => {
+      //   item.map((i, index, arr) => {
+      //     newVal.push(i);
+      //   });
+      // });
+      // const ID = newVal.filter((item, index, arr) => {
+      //   return arr.indexOf(item, 0) === index;
+      // });
+      // const i = ID.filter(item => {
+      //   return this.parentId.indexOf(item) === -1;
+      // });
+      // console.log(i);
+    },
+    async editPermission(){
+      const res = await editSystemPermission(this.dto)
       if(res){
         if(res.code===200){
-          this.$message("权限已删除");
-               const res = await systemPermission({ pageNum: 1, pageSize: 100 });
-      if (res) {
-        const { list } = res.data;
-        if (res.code === 200) {
-          this.gridDataSystem = list;
-        }
-      }
-
+          this.$message('编辑成功')
+          this.dto.frontMark = ''
+          this.dto.name = ''
         }
       }
     },
-    async permissionList() {
-      this.dialogTableVisibleSystem = true
+    permissionEdit(i, item) {
+      console.log(item);
+      this.dto.parentId = item.id; //父权限id
+      this.innerVisible = true;
+      this.permissionLists = item; //子权限列表
+    },
+    async permissionDlete(i, item) {
+      const res = await deletesystemPermission(item.id);
+      if (res) {
+        if (res.code === 200) {
+          this.$message("权限已删除");
+          const res = await systemPermission({ pageNum: 1, pageSize: 100 });
+          if (res) {
+            const { list } = res.data;
+            if (res.code === 200) {
+              this.gridDataSystem = list;
+            }
+          }
+        }
+      }
+    },
+    async s() {
+      this.dialogTableVisibleSystem = true;
       const res = await systemPermission({ pageNum: 1, pageSize: 100 });
       if (res) {
         const { list } = res.data;
@@ -390,6 +516,19 @@ export default {
     },
     async handleClickRole() {
       if (this.Edit) {
+        // let newVal = [];
+        console.log(this.roleAddParmas.permissionIds);
+        // this.roleAddParmas.permissionIds.map(item => {
+        //   item.map(i => {
+        //     newVal.push(i);
+        //   });
+        // });
+        // const ID = newVal.filter((item, index, arr) => {
+        //   return arr.indexOf(item, 0) === index;
+        // });
+        // const i = ID.filter(item => {
+        //   return this.parentId.indexOf(item) === -1;
+        // });
         const res = await editRole({
           deptId: this.roleAddParmas.deptId,
           permissionIds: this.roleAddParmas.permissionIds,
@@ -408,7 +547,25 @@ export default {
           }
         }
       } else {
-        const res = await roleAdd(this.roleAddParmas);
+        let newVal = [];
+        this.roleAddParmas.permissionIds.map(item => {
+          item.map((i, index, arr) => {
+            newVal.push(i);
+          });
+        });
+        const ID = newVal.filter((item, index, arr) => {
+          return arr.indexOf(item, 0) === index;
+        });
+        const i = ID.filter(item => {
+          return this.parentId.indexOf(item) === -1;
+        });
+
+        const res = await roleAdd({
+          deptId: this.roleAddParmas.deptId,
+          permissionIds: i,
+          roleName: this.roleAddParmas.roleName
+        });
+        // const res = await roleAdd(this.roleAddParmas);
         if (res) {
           if (res.code === 200) {
             this.roleAddParmas.deptId = null;
@@ -429,13 +586,35 @@ export default {
       this.getRolesList();
     },
     async getRolesList() {
-      let options = []
+      let options = [];
+      // let children = [];
       const res = await systemPermission({ pageNum: 1, pageSize: 100 });
       if (res) {
         const { list } = res.data;
         if (res.code === 200) {
-          this.options = list;
-        console.log(list);
+          list.map(item => {
+            options.push({
+              value: item.id,
+              label: item.name,
+              children: item.childPermission
+            });
+          });
+
+          this.options = JSON.parse(
+            JSON.stringify(options)
+              .replace(/name/g, "label")
+              .replace(/id/g, "value")
+          );
+          this.options.map(item => {
+            this.parentId.push(item.value);
+          });
+          console.log(this.parentId);
+          //  list.map(i=>{
+          //    i.childPermission.map(item=>{
+          //      list.push(item)
+          //    })
+          //  })
+          //  this.options = list
         }
       }
     },

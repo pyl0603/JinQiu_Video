@@ -111,289 +111,289 @@ export const asyncRoutes = [
         }]
     },
 
-    {
-        path: '/basketball',
-        component: Layout,
-        redirect: '/basketball/banner',
-        name: '篮球应用',
-        meta: { title: '篮球应用', icon: 'example',  },
-        children: [
-            {
-                path: 'banner',
-                name: 'banner',
-                component: () =>
-                    import('@/views/banner/index'),
-                meta: { title: 'banner设置', icon: 'tree' }
-            },
-            {
-                path: 'push',
-                name: 'push',
-                component: () =>
-                    import('@/views/push/index'),
-                meta: { title: '内容推送', icon: 'form' }
-            },
-            {
-                path: 'follow',
-                name: 'follow',
-                component: () =>
-                    import('@/views/follow/index'),
-                meta: { title: '关注列表', icon: 'tree' }
-            },
-            {
-                path: 'article',
-                name: '文章管理',
-                component: () =>
-                    import('@/views/check/article'),
-                meta: { title: '文章管理', icon: 'tree' }
-            },
-            {
-                path: 'video',
-                name: '视频管理',
-                component: () =>
-                    import('@/views/check/video'),
-                meta: { title: '视频管理', icon: 'tree' }
-            },
-            {
-                path: 'circle',
-                name: 'circle',
-                component: () =>
-                    import('@/views/circle/index'),
-                meta: { title: '圈子管理(管理)', icon: 'tree',}
-            },
-            {
-                path: 'live',
-                name: 'live',
-                component: () =>
-                    import('@/views/live/index'),
-                meta: { title: '直播间设置(管理)', icon: 'tree',  }
-            },
-            {
-                path: 'channel',
-                name: 'channel',
-                component: () =>
-                    import('@/views/channel/index'),
-                meta: { title: '频道调整(管理)', icon: 'tree', }
-            }
-        ]
-    },
-    {
-        path: '/football',
-        component: Layout,
-        redirect: '/football/banner',
-        name: '足球应用',
-        meta: { title: '足球应用', icon: 'example', },
-        children: [
-            {
-                path: 'banner',
-                name: 'banner',
-                component: () =>
-                    import('@/views/banner/index'),
-                meta: { title: 'banner设置', icon: 'tree' }
-            },
-            {
-                path: 'push',
-                name: 'push',
-                component: () =>
-                    import('@/views/push/index'),
-                meta: { title: '内容推送', icon: 'form' }
-            },
-            {
-                path: 'follow',
-                name: 'follow',
-                component: () =>
-                    import('@/views/follow/index'),
-                meta: { title: '关注列表', icon: 'tree' }
-            },
-            {
-                path: 'article',
-                name: '文章管理',
-                component: () =>
-                    import('@/views/check/article'),
-                meta: { title: '文章管理', icon: 'tree' }
-            },
-            {
-                path: 'video',
-                name: '视频管理',
-                component: () =>
-                    import('@/views/check/video'),
-                meta: { title: '视频管理', icon: 'tree' }
-            },
-            {
-                path: 'circle',
-                name: 'circle',
-                component: () =>
-                    import('@/views/circle/index'),
-                meta: { title: '圈子管理(管理)', icon: 'tree',  }
-            },
-            {
-                path: 'live',
-                name: 'live',
-                component: () =>
-                    import('@/views/live/index'),
-                meta: { title: '直播间设置(管理)', icon: 'tree', }
-            },
-            {
-                path: 'channel',
-                name: 'channel',
-                component: () =>
-                    import('@/views/channel/index'),
-                meta: { title: '频道调整(管理)', icon: 'tree', }
-            }
-        ]
-    },
+    // {
+    //     path: '/basketball',
+    //     component: Layout,
+    //     redirect: '/basketball/banner',
+    //     name: '篮球应用',
+    //     meta: { title: '篮球应用', icon: 'example',  },
+    //     children: [
+    //         {
+    //             path: 'banner',
+    //             name: 'banner',
+    //             component: () =>
+    //                 import('@/views/banner/index'),
+    //             meta: { title: 'banner设置', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'push',
+    //             name: 'push',
+    //             component: () =>
+    //                 import('@/views/push/index'),
+    //             meta: { title: '内容推送', icon: 'form' }
+    //         },
+    //         {
+    //             path: 'follow',
+    //             name: 'follow',
+    //             component: () =>
+    //                 import('@/views/follow/index'),
+    //             meta: { title: '关注列表', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'article',
+    //             name: '文章管理',
+    //             component: () =>
+    //                 import('@/views/check/article'),
+    //             meta: { title: '文章管理', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'video',
+    //             name: '视频管理',
+    //             component: () =>
+    //                 import('@/views/check/video'),
+    //             meta: { title: '视频管理', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'circle',
+    //             name: 'circle',
+    //             component: () =>
+    //                 import('@/views/circle/index'),
+    //             meta: { title: '圈子管理(管理)', icon: 'tree',}
+    //         },
+    //         {
+    //             path: 'live',
+    //             name: 'live',
+    //             component: () =>
+    //                 import('@/views/live/index'),
+    //             meta: { title: '直播间设置(管理)', icon: 'tree',  }
+    //         },
+    //         {
+    //             path: 'channel',
+    //             name: 'channel',
+    //             component: () =>
+    //                 import('@/views/channel/index'),
+    //             meta: { title: '频道调整(管理)', icon: 'tree', }
+    //         }
+    //     ]
+    // },
+    // {
+    //     path: '/football',
+    //     component: Layout,
+    //     redirect: '/football/banner',
+    //     name: '足球应用',
+    //     meta: { title: '足球应用', icon: 'example', },
+    //     children: [
+    //         {
+    //             path: 'banner',
+    //             name: 'banner',
+    //             component: () =>
+    //                 import('@/views/banner/index'),
+    //             meta: { title: 'banner设置', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'push',
+    //             name: 'push',
+    //             component: () =>
+    //                 import('@/views/push/index'),
+    //             meta: { title: '内容推送', icon: 'form' }
+    //         },
+    //         {
+    //             path: 'follow',
+    //             name: 'follow',
+    //             component: () =>
+    //                 import('@/views/follow/index'),
+    //             meta: { title: '关注列表', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'article',
+    //             name: '文章管理',
+    //             component: () =>
+    //                 import('@/views/check/article'),
+    //             meta: { title: '文章管理', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'video',
+    //             name: '视频管理',
+    //             component: () =>
+    //                 import('@/views/check/video'),
+    //             meta: { title: '视频管理', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'circle',
+    //             name: 'circle',
+    //             component: () =>
+    //                 import('@/views/circle/index'),
+    //             meta: { title: '圈子管理(管理)', icon: 'tree',  }
+    //         },
+    //         {
+    //             path: 'live',
+    //             name: 'live',
+    //             component: () =>
+    //                 import('@/views/live/index'),
+    //             meta: { title: '直播间设置(管理)', icon: 'tree', }
+    //         },
+    //         {
+    //             path: 'channel',
+    //             name: 'channel',
+    //             component: () =>
+    //                 import('@/views/channel/index'),
+    //             meta: { title: '频道调整(管理)', icon: 'tree', }
+    //         }
+    //     ]
+    // },
 
     
-    {
-        path: '/expert',
-        component: Layout,
-        redirect: '/expert/banner',
-        name: '专家应用',
-        meta: { title: '专家应用', icon: 'example',  },
-        children: [
-            {
-                path: 'banner',
-                name: 'banner',
-                component: () =>
-                    import('@/views/banner/expert'),
-                meta: { title: 'banner设置', icon: 'tree' }
-            },
-            {
-                path: 'index',
-                name: 'index',
-                meta: { title: '暂无', icon: 'tree' }
-            },
-        ]
-    },
+    // {
+    //     path: '/expert',
+    //     component: Layout,
+    //     redirect: '/expert/banner',
+    //     name: '专家应用',
+    //     meta: { title: '专家应用', icon: 'example',  },
+    //     children: [
+    //         {
+    //             path: 'banner',
+    //             name: 'banner',
+    //             component: () =>
+    //                 import('@/views/banner/expert'),
+    //             meta: { title: 'banner设置', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'index',
+    //             name: 'index',
+    //             meta: { title: '暂无', icon: 'tree' }
+    //         },
+    //     ]
+    // },
 
 
 
-    {
-        path: '/lives',
-        component: Layout,
-        redirect: '/lives/index',
-        name: '直播管理',
-        meta: { title: '直播管理', icon: 'example', },
-        children: [
-            {
-                path: 'channel',
-                name: 'channel',
-                component: () =>
-                    import('@/views/channel/anchor'),
-                meta: { title: '频道管理', icon: 'tree',  }
-            },
-            {
-                path: 'banner',
-                name: 'banner',
-                component: () =>
-                    import('@/views/banner/anchor'),
-                meta: { title: 'banner管理', icon: 'tree' }
-            },
-            {
-                path: '/self/live',
-                name: 'live',
-                component: () =>
-                    import('@/views/live/index'),
-                meta: { title: '自建比赛直播间设置', icon: 'tree',  }
-            },
-            {
-                path: 'follow',
-                name: 'follow',
-                component: () =>
-                    import('@/views/follow/anchor'),
-                meta: { title: '关注列表', icon: 'tree' }
-            },
-            {
-                path: 'anchor',
-                name: 'anchor',
-                component: () =>
-                    import('@/views/anchor/index'),
-                meta: { title: '主播管理', icon: 'tree' }
-            },
-        ]
-    },
+    // {
+    //     path: '/lives',
+    //     component: Layout,
+    //     redirect: '/lives/index',
+    //     name: '直播管理',
+    //     meta: { title: '直播管理', icon: 'example', },
+    //     children: [
+    //         {
+    //             path: 'channel',
+    //             name: 'channel',
+    //             component: () =>
+    //                 import('@/views/channel/anchor'),
+    //             meta: { title: '频道管理', icon: 'tree',  }
+    //         },
+    //         {
+    //             path: 'banner',
+    //             name: 'banner',
+    //             component: () =>
+    //                 import('@/views/banner/anchor'),
+    //             meta: { title: 'banner管理', icon: 'tree' }
+    //         },
+    //         {
+    //             path: '/self/live',
+    //             name: 'live',
+    //             component: () =>
+    //                 import('@/views/live/index'),
+    //             meta: { title: '自建比赛直播间设置', icon: 'tree',  }
+    //         },
+    //         {
+    //             path: 'follow',
+    //             name: 'follow',
+    //             component: () =>
+    //                 import('@/views/follow/anchor'),
+    //             meta: { title: '关注列表', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'anchor',
+    //             name: 'anchor',
+    //             component: () =>
+    //                 import('@/views/anchor/index'),
+    //             meta: { title: '主播管理', icon: 'tree' }
+    //         },
+    //     ]
+    // },
 
-    {
-        path: '/check',
-        component: Layout,
-        redirect: '/check/football/article',
-        name: '内容审核',
-        meta: { title: '内容审核', icon: 'example',  },
-        children: [
-            {
-                path: 'expert',
-                name: 'expert',
-                component: () =>
-                    import('@/views/check/expert'),
-                meta: { title: '专家方案审核', icon: 'tree' }
-            },
-            {
-                path: 'football/article',
-                name: '足球文章审核',
-                component: () =>
-                    import('@/views/check/article'),
-                meta: { title: '足球文章审核', icon: 'form' }
-            },
-            {
-                path: 'football/video',
-                name: '足球视频审核',
-                component: () =>
-                    import('@/views/check/video'),
-                meta: { title: '足球视频审核', icon: 'form' }
-            },
-            {
-                path: 'basketball/article',
-                name: '篮球文章审核',
-                component: () =>
-                    import('@/views/check/article'),
-                meta: { title: '篮球文章审核', icon: 'form' }
-            },
-            {
-                path: 'basketball/video',
-                name: '篮球视频审核',
-                component: () =>
-                    import('@/views/check/video'),
-                meta: { title: '篮球视频审核', icon: 'form' }
-            },
-            {
-                path: 'diss',
-                name: 'diss',
-                component: () =>
-                    import('@/views/diss/index'),
-                meta: { title: '帖子管理', icon: 'tree' }
-            },
-            {
-                path: 'eva',
-                name: 'eva',
-                component: () =>
-                    import('@/views/check/eva'),
-                meta: { title: '评论审核', icon: 'tree' }
-            },
-            {
-                path: 'report',
-                name: 'report',
-                component: () =>
-                    import('@/views/report/index'),
-                meta: { title: '举报', icon: 'tree' }
-            }
-        ]
-    },
+    // {
+    //     path: '/check',
+    //     component: Layout,
+    //     redirect: '/check/football/article',
+    //     name: '内容审核',
+    //     meta: { title: '内容审核', icon: 'example',  },
+    //     children: [
+    //         {
+    //             path: 'expert',
+    //             name: 'expert',
+    //             component: () =>
+    //                 import('@/views/check/expert'),
+    //             meta: { title: '专家方案审核', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'football/article',
+    //             name: '足球文章审核',
+    //             component: () =>
+    //                 import('@/views/check/article'),
+    //             meta: { title: '足球文章审核', icon: 'form' }
+    //         },
+    //         {
+    //             path: 'football/video',
+    //             name: '足球视频审核',
+    //             component: () =>
+    //                 import('@/views/check/video'),
+    //             meta: { title: '足球视频审核', icon: 'form' }
+    //         },
+    //         {
+    //             path: 'basketball/article',
+    //             name: '篮球文章审核',
+    //             component: () =>
+    //                 import('@/views/check/article'),
+    //             meta: { title: '篮球文章审核', icon: 'form' }
+    //         },
+    //         {
+    //             path: 'basketball/video',
+    //             name: '篮球视频审核',
+    //             component: () =>
+    //                 import('@/views/check/video'),
+    //             meta: { title: '篮球视频审核', icon: 'form' }
+    //         },
+    //         {
+    //             path: 'diss',
+    //             name: 'diss',
+    //             component: () =>
+    //                 import('@/views/diss/index'),
+    //             meta: { title: '帖子管理', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'eva',
+    //             name: 'eva',
+    //             component: () =>
+    //                 import('@/views/check/eva'),
+    //             meta: { title: '评论审核', icon: 'tree' }
+    //         },
+    //         {
+    //             path: 'report',
+    //             name: 'report',
+    //             component: () =>
+    //                 import('@/views/report/index'),
+    //             meta: { title: '举报', icon: 'tree' }
+    //         }
+    //     ]
+    // },
 
-    {
-        path: '/activity',
-        component: Layout,
-        redirect: '/invitation',
-        name: '活动',
-        meta: { title: '活动', icon: 'example',  },
-        children: [
-            {
-                path: 'invitation',
-                name: '拉新活动',
-                component: () =>
-                    import('@/views/invitation/index'),
-                meta: { title: '拉新活动', icon: 'form' }
-            },
-        ]
-    },
+    // {
+    //     path: '/activity',
+    //     component: Layout,
+    //     redirect: '/invitation',
+    //     name: '活动',
+    //     meta: { title: '活动', icon: 'example',  },
+    //     children: [
+    //         {
+    //             path: 'invitation',
+    //             name: '拉新活动',
+    //             component: () =>
+    //                 import('@/views/invitation/index'),
+    //             meta: { title: '拉新活动', icon: 'form' }
+    //         },
+    //     ]
+    // },
     {
         path: '/backups',
         component: Layout,
@@ -429,13 +429,13 @@ export const asyncRoutes = [
             //         import('@/views/feedback/index'),
             //     meta: { title: '用户反馈', icon: 'form' }
             // },
-            {
-                path: 'appUser',
-                name: 'appUser',
-                component: () =>
-                    import('@/views/appUser/index'),
-                meta: { title: '用户维护', icon: 'tree' }
-            },
+            // {
+            //     path: 'appUser',
+            //     name: 'appUser',
+            //     component: () =>
+            //         import('@/views/appUser/index'),
+            //     meta: { title: '用户维护', icon: 'tree' }
+            // },
             {
                 path: 'journal',
                 name: 'journal',
