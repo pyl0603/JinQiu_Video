@@ -88,28 +88,28 @@ export const constantRoutes = [
       },
     ]
   },
-  // {
-  //   path: '/source',
-  //   component: Layout,
-  //   redirect: '/fileMana/index',
-  //   name: '资源库',
-  //   meta: { title: '资源库', icon: 'example' },
-  //   children: [{
-  //     path: 'index',
-  //     name: 'fileMana',
-  //     component: () =>
-  //       import('@/views/fileMana/index'),
-  //     meta: { title: '文件管理', icon: 'form' }
-  //   },
-  //   {
-  //     path: 'tags',
-  //     name: 'tags',
-  //     component: () =>
-  //       import('@/views/tags/index'),
-  //     meta: { title: '标签管理', icon: 'tree' }
-  //   }
-  //   ]
-  // },
+  {
+    path: '/Collection',
+    component: Layout,
+    redirect: '/Collection/index',
+    name: '合集',
+    meta: { title: '合集', icon: 'example' },
+    children: [{
+      path: 'index',
+      name: 'Collection',
+      component: () =>
+        import('@/views/CollectionMana/index'),
+      meta: { title: '创建合集', icon: 'form' }
+    },
+    {
+      path: 'CollectionMana',
+      name: 'CollectionMana',
+      component: () =>
+        import('@/views/CollectionMana/CollectionMana'),
+      meta: { title: '管理合集', icon: 'tree' }
+    }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -4,42 +4,65 @@
     <div class="list">
       <div class="el-col-24 mb20 cada f14">
         <div class="el-col-12 mt10">
-          <span class="show-tab cp" @click="tabs(0)" :class="{c18c : itemIndex === 0}">正常版本</span>
-          <span class="show-tab cp" @click="tabs(1)" :class="{c18c : itemIndex === 1}">强更版本</span>
+          <!-- <span class="show-tab cp" @click="tabs(0)" :class="{c18c : itemIndex === 0}">正常版本</span>
+          <span class="show-tab cp" @click="tabs(1)" :class="{c18c : itemIndex === 1}">强更版本</span> -->
         </div>
         <div class="el-col-12 tar">
           <el-button type="dqx-btn" @click="upNew">上传新版本</el-button>
         </div>
       </div>
       <el-table :data="tableData" border style="width: 100%;">
-        <el-table-column prop="name" label="版本号"></el-table-column>
-        <el-table-column prop="introduction" label="版本说明"></el-table-column>
+        <el-table-column prop="createTime" label="上传时间"></el-table-column>
+        <el-table-column prop="version" label="版本号"></el-table-column>
+        <el-table-column prop="state" label="是否为强制升级"></el-table-column>
+        <el-table-column prop="versionUrl" label="版本链接"></el-table-column>
         <el-table-column label="操作" width="200">
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="del(scope.row.id)">删除</el-button>
+            <!-- <el-button type="text" size="small" @click="del(scope.row.id)"
+              >删除</el-button
+            > -->
+            <el-button type="text" size="small" @click="edit(scope.$index, scope.row)"
+              >编辑</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
     </div>
     <!-- 弹窗 -->
-    <el-dialog title="添加新版本" :visible.sync="dialogVisible" width="30%" :show-close="false">
+    <el-dialog
+      title="添加新版本"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :show-close="false"
+    >
       <div class="dialog-cont">
         <div class="ver-info">
           <div class="mb20">
             <em>版本号：</em>
-            <el-input placeholder="请输入版本号" v-inputRule v-model="name"></el-input>
+            <el-input
+              placeholder="请输入版本号"
+              v-inputRule
+              v-model="dtoAddVersion.version"
+            ></el-input>
           </div>
-          <div class="mb20">
+          <!-- <div class="mb20">
             <em>版本序号：</em>
-            <el-input placeholder="请输入版本序号" v-inputRule v-model="version"></el-input>
-          </div>
+            <el-input
+              placeholder="请输入版本序号"
+              v-inputRule
+              v-model="version"
+            ></el-input>
+          </div> -->
           <div class="mb20">
-            <em>简介：</em>
-            <el-input placeholder="请输入简介" v-model="introduction"></el-input>
+            <em>版本链接：</em>
+            <el-input
+              placeholder="请输入版本链接"
+              v-model="dtoAddVersion.versionUrl"
+            ></el-input>
           </div>
-          <div class="mb20" v-if="dialogStatus ==='create'">
+          <div class="mb20" v-if="dialogStatus === 'create'">
             是否强更：
-            <el-switch :value="isForce" @change="changeForce" />
+            <el-switch v-model="dtoAddVersion.isMandatory" />
           </div>
           <div v-if="type === 0">
             <em>上传：</em>
@@ -48,7 +71,7 @@
           </div>
         </div>
         <div slot="footer" class="dialog-footer mt20 tac">
-          <el-button type="dqx-btn" @click="createData">保存</el-button>
+          <el-button type="dqx-btn" @click="editUp?EditRelease():createData()">{{editUp?'编辑':'保存'}}</el-button>
           <el-button @click="dialogVisible = false">取消</el-button>
         </div>
       </div>
@@ -57,12 +80,21 @@
 </template>
 <script>
 import TopTab from "@/views/common/top-tab";
+import moment from "moment";
 import upload from "@/components/uploadAPK/index";
-import { getVersions,addVersions,delVersions } from "@/api/setting";
+import {
+  getVersions,
+  addVersions,
+  delVersions,
+  getVersionList,
+  VersionAdd,
+  VersionUpdate
+} from "@/api/setting";
 import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      editUp:false,
       tabList: [{ name: "iOS", value: 1 }, { name: "Android", value: 0 }],
       itemIndex: 0,
       tableData: [],
@@ -74,7 +106,25 @@ export default {
       version: "",
       introduction: "",
       isForce: false,
-      downloadUrl:''
+      downloadUrl: "",
+      parmas: {
+        osType: 1,
+        pageNum: 1,
+        pageSize: 10
+      },
+      dtoAddVersion: {
+        isMandatory: false,
+        osType: 1,
+        version: "",
+        versionUrl: ""
+      },
+      editParmas:{
+        id:null,
+        isMandatory:false,
+        osType:null,
+        version:'',
+        versionUrl:''
+      }
     };
   },
   components: {
@@ -84,55 +134,109 @@ export default {
   methods: {
     // 新增
     upNew() {
+      this.editUp = false
       this.dialogVisible = true;
     },
     // 新增
-    createData() {
-      addVersions({name:this.name,version:this.version,type:this.type,introduction:this.introduction,force:this.isForce,downloadUrl:this.downloadUrl}).then(_ => {
-        this.dialogVisible = false;
-        this.$message('添加成功');
-        this.getVerIndex();
-      })
+    async createData() {
+      // addVersions({name:this.name,version:this.version,type:this.type,introduction:this.introduction,force:this.isForce,downloadUrl:this.downloadUrl}).then(_ => {
+      //   this.dialogVisible = false;
+      //   this.$message('添加成功');
+      //   this.getVerIndex();
+      // })
+      const res = await VersionAdd(this.dtoAddVersion);
+      if (res) {
+        if (res.code === 200) {
+          this.dialogVisible = false;
+          this.dtoAddVersion.isMandatory = false;
+          this.dtoAddVersion.version = null;
+          this.dtoAddVersion.versionUrl = null;
+          this.$message("添加成功");
+          this.getVerIndex();
+        }
+      }
     },
     // 上传apk
     upAPK(val) {
-      this.downloadUrl = 'https://cdn.jinqiulive.com/apk/jinqiu_aligned_signed_dqx.apk'
-      this.$message('上传成功')
+      this.downloadUrl =
+        "https://cdn.jinqiulive.com/apk/jinqiu_aligned_signed_dqx.apk";
+      this.$message("上传成功");
+    },
+    async EditRelease(){
+      this.editParmas.isMandatory = this.dtoAddVersion.isMandatory
+      this.editParmas.version = this.dtoAddVersion.version
+      this.editParmas.versionUrl = this.dtoAddVersion.versionUrl
+      const res = await VersionUpdate(this.editParmas)
+      if(res){
+        if(res.code===200){
+           this.dialogVisible = false;
+          this.dialogVisible = false;
+          this.dtoAddVersion.isMandatory = false;
+          this.dtoAddVersion.version = null;
+          this.dtoAddVersion.versionUrl = null;
+          this.$message("编辑成功");
+          this.getVerIndex();
+        }
+      }
     },
     // 删除
-    del(val){
+    del(val) {
       delVersions(val).then(_ => {
-        this.$message('删除成功');
+        this.$message("删除成功");
         this.getVerIndex();
-      })
+      });
+    },
+    edit(val,i) {
+      this.editUp = true
+      this.dialogVisible = true;
+      this.editParmas.id = i.id
+      this.editParmas.osType = i.osType
+      
+
+      this.dtoAddVersion.isMandatory = i.state==="强制升级"?true:(i.state==="非强制"?false:'')
+      this.dtoAddVersion.version = i.version
+      this.dtoAddVersion.versionUrl = i.versionUrl
+      console.log(this.editParmas);
     },
     // 是否强更版本
-    changeForce() {
-      this.isForce = !this.isForce;
-    },
+    // changeForce() {
+    //   // this.isForce = !this.isForce;
+    // },
     //   顶部tab
     chooseTab(val) {
-      this.downloadUrl = ''
-      this.type = val;
+      this.dtoAddVersion.osType = val;
+      this.parmas.osType = val;
+
+      this.downloadUrl = "";
       this.itemIndex = 0;
       this.force = false;
+      this.getVerIndex();
     },
-    changeForce(){
-      this.isForce  =!this.isForce
-    },
+    // changeForce() {
+    //   this.isForce = !this.isForce;
+    // },
     // 高亮
     tabs(val) {
       this.itemIndex = val;
       this.force = val === 1 ? true : false;
     },
     // 获取版本
-    getVerIndex() {
-      getVersions({ page: this.page, type: this.type, force: this.force }).then(
-        res => {
-          this.tableData = res.data;
-          this.$store.commit("setTotal", res.meta.pagination.total);
-        }
-      );
+    async getVerIndex() {
+      //   getVersions({ page: this.page, type: this.type, force: this.force }).then(
+      //     res => {
+      //       this.tableData = res.data;
+      //       this.$store.commit("setTotal", res.meta.pagination.total);
+      //     }
+      //   );
+      const res = await getVersionList(this.parmas);
+      const { list, total } = res.data;
+
+      this.tableData = list;
+      this.tableData.map(item => {
+        item.createTime = moment(item.createTime).format("YYYY-MM-DD HH:mm:ss");
+        item.state === 2? (item.state = "强制升级"): item.state === 1? (item.state = "非强制"): "";});
+
+      this.$store.commit("setTotal", total);
     }
   },
   mounted() {
@@ -161,7 +265,7 @@ export default {
 .show-tab + .show-tab {
   border-left: 1px solid #f5f5f5;
 }
-/deep/.inputFlieA{
+/deep/.inputFlieA {
   position: absolute;
   width: 120px;
   margin-top: -40px;
@@ -170,4 +274,3 @@ export default {
   opacity: 0;
 }
 </style>
-

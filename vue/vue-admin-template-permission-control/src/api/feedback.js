@@ -4,41 +4,46 @@ import request from '@/utils/request'
  * 获取列表
  * @param {*} params 
  */
-export function getIndex(params) {
+export function getplayList(params) {
     return request({
-        url: '/feedback',
+        url: `/cloud-admin/feedback/play-video/${params.state}/${params.pageNum}/${params.pageSize}`,
         method: 'get',
-        params
     })
 }
 
-/**
- * 反馈回复
- */
-export function feedback(id, data) {
+export function playFail(feedbackId) {
     return request({
-        url: `/feedback/${id}`,
-        method: 'put',
-        data
+        url: `/cloud-admin/feedback/play-video/process/fail/${feedbackId}`,
+        method: 'get',
     })
 }
 
-/**
- * 删除反馈
- */
-export function delFeedback(data) {
+export function playPass(feedbackId) {
     return request({
-        url: `/feedback/${data}`,
-        method: 'delete'
+        url: `/cloud-admin/feedback/play-video/process/ok/${feedbackId}`,
+        method: 'get',
     })
 }
 
-/**
- * 反馈详情
- */
-export function feedbackDet(params) {
+export function getReportList(params) {
     return request({
-        url: `/feedback/${feedback}`,
-        method: 'get'
+        url: `/cloud-admin/feedback/report/${params.state}/${params.pageNum}/${params.pageSize}`,
+        method: 'get',
     })
 }
+
+
+export function ReportFail(feedbackId) {
+    return request({
+        url: `/cloud-admin/feedback/report/process/ignore/${feedbackId}`,
+        method: 'get',
+    })
+}
+export function ReportPass(feedbackId) {
+    return request({
+        url: `/cloud-admin/feedback/report/process/ok/${feedbackId}`,
+        method: 'get',
+    })
+}
+
+

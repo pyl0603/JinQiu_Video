@@ -79,7 +79,6 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log(state.userInfo, '!!!!!!!!!!!!!!!!!!');
       // getInfo(state.token).then(response => {
       // const { data } = response
 

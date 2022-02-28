@@ -136,7 +136,8 @@ export function getLabel(searchText) {
 	return request({
 		url:`/cloud-news-publish/tags/search`,
 		method: 'get',
-		searchText
+		// searchText
+		params:{searchText}
 	})
 }
 
@@ -152,7 +153,16 @@ export function recommendNews(nowNewsId) {
 
 export function getResourceLibrary(nextToken) {
 	return request({
-		url:`/cloud-oss/oss/news-publish/${nextToken}`,
+		url:`/cloud-oss/oss/news-publish/repository/${nextToken}`,
 		method: 'get',
+	})
+}
+
+
+
+export function deleteNews(videoId) {
+	return request({
+		url:`/cloud-news-publish/home/video/delete/${videoId}`,
+		method: 'delete',
 	})
 }

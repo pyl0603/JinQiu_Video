@@ -23,3 +23,36 @@ export function getPushLogs(params) {
         params
     })
 }
+
+
+
+export function getNoticeStatistical() {
+    return request({
+        url: '/cloud-admin/notice/statistical',
+        method: 'get',
+    })
+}
+
+
+export function getStatistical(params) {
+    return request({
+        url: `/cloud-admin/news/statistical/${params.newsId}/${params.startDate}/${params.endDate}`,
+        method: 'get',
+    })
+}
+
+
+export function getNoticeRecord(params) {
+    return request({
+        url: `/cloud-admin/notice/record/${params.pageNum}/${params.pageSize}/${params.category}/${params.dateStart}/${params.dateEnd}?searchText=${params.searchText}`,
+        method: 'get',
+    })
+}
+
+
+export function getNoticeSync(taskId) {
+    return request({
+        url: `/cloud-admin/notice/sync/${taskId}`,
+        method: 'get',
+    })
+}

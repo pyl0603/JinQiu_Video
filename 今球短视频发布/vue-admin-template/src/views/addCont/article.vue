@@ -164,7 +164,7 @@
           />
         </el-button>
         <el-button @click="outerVisible = false">取 消</el-button>
-        <el-button type="primary" @click="innerVisible = true">确 定</el-button>
+        <el-button type="primary" @click="outerVisible = true">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -175,8 +175,6 @@ import axios from "axios";
 import Editor from "@/views/tinymce-editor/tinymce-editor.vue";
 import {
   getOssCertificate,
-  getImage,
-  uploadNews,
   getNews,
   getLabel,
   getResourceLibrary,
@@ -219,6 +217,7 @@ export default {
       restaurants: [], //标签
       state: "",
       timeout: null,
+      showTimeout:null,
       tagsId: [],
       content: "",
       editorOption: {},
@@ -483,6 +482,7 @@ export default {
 
     //删除标签
     handleClose(tag) {
+      // 过滤被删除的标签，赋值给标签组
      const tagsId = this.tagsId.filter(item=>{
         return item.name !== tag
       })
@@ -490,6 +490,7 @@ export default {
       console.log(this.tagsId);
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
+  
     // 控制input框输入
     showInput() {
       this.inputVisible = true;
@@ -554,7 +555,9 @@ export default {
     },
 
      querySearchAsync(queryString, cb) {
-       this.loadAll()
+       clearTimeout(this.showTimeout)
+       this.showTimeout = setTimeout(() => {
+          //  this.loadAll()
       this.restaurants = this.loadAll();
       console.log(this.restaurants);
       var restaurants = this.restaurants; //标签
@@ -565,6 +568,7 @@ export default {
       this.timeout = setTimeout(() => {
         cb(results);
       }, 2000 * Math.random());
+       }, 3000);
     },
     createStateFilter(queryString) {
       return (state) => {
@@ -615,6 +619,23 @@ export default {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+}
+.goodword{
+position: absolute;
+left: 50%;
+top: 50%;
+display: flex;  
+flex-direction: row;
+justify-content: space-between;
+align-content: center;
+width: 100%;
+height: calc(100%-200px);
+transform: translate(-50%,-50%);
+background-color: #8c939d;
+border: 1px double #ccc;
+border-radius: 50%;
+box-shadow: 5px 5px 5px #ccc;
+
 }
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;

@@ -2,9 +2,8 @@ import request from '@/utils/request'
 
 export function login(data) {
     return request({
-        url: '/login/account',
-        method: 'post',
-        data
+        url: `/cloud-login/login/phone-number-verify-code/${data.phoneNumber}/${data.verifyCode}`,
+        method: 'get',
     })
 }
 
@@ -38,3 +37,11 @@ export function userDetail(user, params) {
 		params
 	})
 }
+
+
+export function GetVerification(phoneNumber) {
+    return request({
+        url:`/cloud-sms/verify-code/send/app-login/${phoneNumber}`,
+  
+    })
+  }

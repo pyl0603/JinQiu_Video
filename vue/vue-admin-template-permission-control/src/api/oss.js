@@ -62,3 +62,29 @@ export function getOssVideoList(params) {
 
 
  
+export function getResourceLibrary(nextToken) {
+	return request({
+		url:`/cloud-oss/oss/news-publish/repository/${nextToken}`,
+		method: 'get',
+	})
+}
+
+
+// h获取阿里云对象存储api凭证
+export function getOssCertificate() {
+	return request({
+		url: '/cloud-oss/oss/admin/token',
+		method: 'get',
+	})
+}
+
+
+
+export function noticeSend(parmas) {
+	return request({
+		url: '/cloud-admin/notice/send',
+		method: 'post',
+		data:parmas
+	})
+}
+

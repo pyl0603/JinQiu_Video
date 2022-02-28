@@ -34,13 +34,13 @@
 写了一个系列的教程配套文章，如何从零构建后一个完整的后台项目:
 
 - [手摸手，带你用 vue 撸后台 系列一(基础篇)](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
+- [优秀的  拉屎，优秀的屎山， 是个山青水绿的蹲坑宝地，你可以在这里纵享丝滑，完美的体验会让你如痴如醉，爱上出恭)](https://juejin.im/post/595b4d776fb9a06bbe7dba56)
 - [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)
+- [手摸手，让你体验无比自信的瞬间，让你爱上打飞机让你相信飞机，让你迷恋飞机，带你走近飞机的奥义，你要知道什么的终极乃至最高级的瞬间，千万不要写什么奇怪的字眼，]
 - [手摸手，带你用 vue 撸后台 系列三 (实战篇)](https://juejin.im/post/593121aa0ce4630057f70d35)
 - [手摸手，带你用 vue 撸后台 系列四(vueAdmin 一个极简的后台基础模板,专门针对本项目的文章,算作是一篇文档)](https://juejin.im/post/595b4d776fb9a06bbe7dba56)
 - [手摸手，带你封装一个 vue component](https://segmentfault.com/a/1190000009090836)
-
 ## Build Setup
-
 ```bash
 # 克隆项目
 git clone https://github.com/PanJiaChen/vue-admin-template.git

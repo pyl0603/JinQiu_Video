@@ -7,7 +7,8 @@ const state = {
     name: '',
     avatar: '',
     roles: [],
-    uid:''
+    uid:'',
+    userInfo:{}
 }
 
 const mutations = {
@@ -25,18 +26,23 @@ const mutations = {
     },
     SET_UID: (state, uid) => {
         state.uid = uid
+    },
+    SET_USERINFO: (state, userInfo) => {
+        state.userInfo = userInfo
     }
 }
 
 const actions = {
     // user login
     login({ commit }, userInfo) {
-        const { username, password } = userInfo
+        const { username, password,code } = userInfo
         return new Promise((resolve, reject) => {
-            login({ username: username.trim(), password: password }).then(response => {
+            login({ phoneNumber: username.trim(), verifyCode: code }).then(response => {
                 const { data } = response
-                commit('SET_TOKEN', data.access_token)
-                setToken(data.access_token)
+                commit('SET_TOKEN', data.userToken)
+                commit('SET_USERINFO', data.userInfo)
+                setToken(data.userToken)
+                console.log(data);
                 resolve()
             }).catch(error => {
                 reject(error)
@@ -47,31 +53,42 @@ const actions = {
     // get user info
     getInfo({ commit, state }) {
         return new Promise((resolve, reject) => {
-            getInfo(state.token).then(response => {
-                const { data } = response
+            // getInfo(state.token).then(response => {
+                // const { data } = response
 
-                if (!data) {
-                    reject('Verification failed, please Login again.')
-                }
-                console.log(data)
-                const { roles, nickname, avatar_url,id } = data
+                // if (!data) {
+                //     reject('Verification failed, please Login again.')
+                // }
+                // console.log(data)
+                console.log(state.userInfo);
+                // const { roles, nickname, avatar_url,id } = state.userInfo
                 // 如果是部门主管，追加一个部门管理权限 SETTING_DEPARTMENT_MANAGE_MY
-                if (data.departments.length) {
-                    roles.push('SETTING_DEPARTMENT_MANAGE_MY')
-                }
-                // roles must be a non-empty array
-                if (!roles || roles.length <= 0) {
-                    reject('getInfo: roles must be a non-null array!')
-                }
-
+                // if (data.departments.length) {
+                //     roles.push('SETTING_DEPARTMENT_MANAGE_MY')
+                // }
+                // // roles must be a non-empty array
+                // if (!roles || roles.length <= 0) {
+                //     reject('getInfo: roles must be a non-null array!')
+                // }
+                if (!state.userInfo) {
+                    return reject('Verification failed, please Login again.')
+                  }
+                  const roles = ['admin']
+                  const { avatar, userId, nickname } = state.userInfo
+                  const data = {
+                    name: nickname,
+                    avatar,
+                    userId,
+                    roles,
+                  }
                 commit('SET_ROLES', roles)
-                commit('SET_UID',id)
+                commit('SET_UID',userId)
                 commit('SET_NAME', nickname)
-                commit('SET_AVATAR', avatar_url)
+                commit('SET_AVATAR', avatar)
                 resolve(data)
-            }).catch(error => {
-                reject(error)
-            })
+            // }).catch(error => {
+            //     reject(error)
+            // })
         })
     },
 

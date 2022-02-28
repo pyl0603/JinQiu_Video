@@ -1,138 +1,169 @@
 <template>
-  <div class="app-user">
-    
-    <top-tab ref="topTab" @chooseTab="chooseTab" :tabList="tabList"></top-tab>
+  <div>
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" style="marginLeft:1rem">
+  <el-menu-item index=-1>所有</el-menu-item>
+  <el-menu-item index=0>封禁</el-menu-item>
+  <el-menu-item index=1>正常</el-menu-item>
+
+</el-menu>
     <el-table
-      :data="tableData"
-      border
-      style="width: 100%"
-      class="mb10 mt10"
-      height="calc(100vh - 240px)"
-    >
-      <el-table-column prop="id" label="ID"></el-table-column>
-      <el-table-column label="用户头像">
-          <template slot-scope="scope">
-            <img :src="scope.row.applies[scope.row.applies.length -1 ].current" alt="" class="user-avatar">
-              <img :src="scope.row.applies[scope.row.applies.length -1 ].current" alt="" class="big-avatar">
-            <!-- <div v-for="item in scope.row.applies" :key="item.id" v-if="item.type">
-              
-            </div> -->
-          </template>
-      </el-table-column>
-      <el-table-column prop="nickname" label="用户昵称"></el-table-column>
-      <el-table-column prop="mobile" label="手机"></el-table-column>
-      <el-table-column prop="roles[0].name" label="第三方"></el-table-column>
-      <el-table-column label="操作" width="120">
-        <template slot-scope="scope">
-          <el-button @click="confirm(scope.row.applies)" type="text" size="small">通过</el-button>
-          <el-button @click="cancle(scope.row.applies)" type="text" size="small">驳回</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    :data="
+      tableData.filter(
+        data =>
+          !options.searchText ||
+          data.name.toLowerCase().includes(options.searchText.toLowerCase())
+      )
+    "
+    style="width: 100%"
+  >
+    <el-table-column width="200">
+      <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="options.searchText"
+          size="mini"
+          placeholder="输入关键字搜索"
+          @keyup.enter.native="searchUser"
+        />
+      </template>
+      <template slot-scope="scope">
+        <el-button
+          size="mini"
+          type="text"
+          style="marginLeft:1rem"
+          @click="handleLock(scope.$index, scope.row)"
+          v-if="options.state==='0'?false:true"
+          >封禁</el-button
+        >
+        <el-button
+          size="mini"
+          type="text"
+          
+          @click="handleUnlock(scope.$index, scope.row)"
+           v-if="options.state==='1'?false:true"
+          >解封</el-button
+        >
+         <!-- <el-button
+          size="mini"
+          type="text"
+          
+          @click="handleDetail(scope.$index, scope.row)"
+           v-if="options.state==='0'?false:true"
+          >详情</el-button
+        > -->
+      </template>
+    </el-table-column>
+    <el-table-column label="ID" prop="id" width="280"> </el-table-column>
+
+    <el-table-column align="center" width="400" label="头像">
+      <template slot-scope="scope">
+        <img
+          :src="scope.row.avatar"
+          width="40"
+          height="40"
+          style="borderRadius:50%;"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column label="用户昵称" width="400" prop="nickname"> </el-table-column>
+    <el-table-column label="手机" prop="mobile" width="400"> </el-table-column>
+    <el-table-column label="创建时间" prop="createdAt"></el-table-column>
+  </el-table>
+   <div style="position: absolute; right: 2%; bottom: 2%">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        background
+        layout="total, prev, pager, next, jumper"
+        :total="total"
+        :page-size="options.pageSize"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
+
 <script>
-import { getCheckUser,checkedUser } from "@/api/staff";
-import { mapGetters } from "vuex";
-import TopTab from "@/views/common/top-tab";
+import {
+  getUserList,
+  lockUser,
+  unlockUser,
+  checkUserInfo,
+  getUserDetail
+} from "@/api/staff";
+import moment from "moment";
+
 export default {
   data() {
     return {
+      activeIndex:'-1',
       tableData: [],
-      dialogFormVisible: false,
-      userInfo: { gender: { display: "" } },
-      mobile:'',
-      tabList: [
-        { name: "未审核列表", value: 'Main' },
-        { name: "审核通过", value: 'Match' },
-        { name: "审核驳回", value: 'Data' }
-      ],
+      options: {
+        pageNum: 1,
+        pageSize: 10,
+        searchText: "",
+        state: -1
+      },
+      prePage: 10,
+      total: 0,
+      pageNum: 1
     };
   },
   methods: {
-    // 顶部tab选择
-    async chooseTab(val){},
-    // 获取列表
-    async getList() {
-      getCheckUser({page: this.page,mobile:this.mobile,page_size:5 }).then(res => {
-        this.tableData = res.data;
-        this.$store.commit("setTotal", res.meta.pagination.total);
-      });
+    async handleLock(index, row) {
+      const res = await lockUser(row.id);
+      if (res.code === 200) {
+        this.$message({
+          message: "封禁用户成功",
+          type: "success"
+        });
+        this.userList();
+      }
     },
-    // 确认
-    async confirm(val){
-      let id =''
-      val.map(res => {
-        if(res.type){
-          id = res.id
-        }
-      })
-      let data = [{id:id,isPass:true}]
-      checkedUser(data).then(_ => {
-        this.$message('操作成功');
-        this.getList();
-      })
+    async handleUnlock(index, row) {
+      const res = await unlockUser(row.id);
+      if (res.code === 200) {
+        this.$message({
+          message: "解禁用户成功",
+          type: "success"
+        });
+        this.userList();
+      }
     },
-    // 驳回
-    async cancle(val){
-      let id =''
-      val.map(res => {
-        if(res.type){
-          id = res.id
-        }
-      })
-       checkedUser([{id:id,isPass:false}]).then(_ => {
-        this.$message('操作成功');
-        this.getList();
-      })
+    async handleDetail(index,row){
+      const res = await getUserDetail(row.id);
+      console.log(res);
     },
-    // 封号
-    async close(val) {}
-  },
-  async mounted() {
-    this.getList();
-    this.$store.commit('setPaging',true)
-  },
-  components:{
-    TopTab
-  },
-  computed: {
-     ...mapGetters(["page"]),
-  },
-  watch: {
-    page(newVal) {
-      console.log(1)
-      this.getList();
+      handleSelect(key, keyPath) {
+        this.options.state = key
+        this.userList();
+      },
+      handleCurrentChange(val) {
+        this.options.pageNum = val
+      this.userList()
+    },
+    searchUser(){
+        this.userList();
+    },
+
+    async userList() {
+      const res = await getUserList(this.options);
+      if (res.code === 200) {
+        const { list, pageSize, total, pageNum } = res.data;
+        this.tableData = list;
+        this.options.pageSize = pageSize;
+        this.total = total;
+        this.options.pageNum = pageNum;
+           this.tableData.map((item) => {
+          item.createdAt = moment(item.createdAt).format(
+            "YYYY-MM-DD HH:mm"
+          );
+        });
+      }
     }
+  },
+
+  created() {
+    this.userList();
   }
 };
 </script>
-<style lang="scss" scoped>
-/deep/.el-dialog {
-  margin-top: 8vh !important;
-  em {
-    display: inline-block;
-    padding: 5px 10px;
-    background: rgba(249, 249, 249, 1);
-    border: 1px solid rgba(206, 206, 206, 1);
-    border-radius: 8px;
-  }
-}
-.user-avatar{
-    width: 45px;
-    height: 45px;
-    // border-radius: 50%;
-}
-.big-avatar{
-    display: none;
-}
-.hover-row .big-avatar{
-    display: inline-block;
-    width: 450px;
-    height: 450px;
-    background: #000;
-    position: absolute;
-    z-index: 999;
-    margin-left: 20px;
-}
-</style>
+<style lang=""></style>

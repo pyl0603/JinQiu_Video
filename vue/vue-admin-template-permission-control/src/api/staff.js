@@ -408,3 +408,194 @@ export function delUserData(data) {
         method: 'delete'
     })
 }
+
+
+
+export function getUserList(parmas) {
+    return request({
+        url: `/cloud-admin/user/search/${parmas.pageNum}/${parmas.pageSize}/${parmas.state}?searchText=${parmas.searchText}`,
+        method: 'get',
+    })
+}
+
+export function lockUser(userId) {
+    return request({
+        url: `/cloud-admin/user/state/lock/${userId}`,
+        method: 'get'
+
+    })
+}
+
+
+export function unlockUser(userId) {
+    return request({
+        url: `/cloud-admin/user/state/unlock/${userId}`,
+        method: 'get'
+
+    })
+}
+
+export function checkUserInfo(params) {
+    return request({
+        url: `/cloud-admin/user/check-info/${params.pageNum}/${params.pageSize}/${params.checkState}`,
+        method: 'get'
+    })
+}
+export function getUserDetail(userId) {
+    return request({
+        url: `/cloud-admin/user/detail/${userId}`,
+        method: 'get'
+    })
+}
+
+export function passCheckUser(userId) {
+    return request({
+        url: `/cloud-admin/user/check-info/pass/${userId}`,
+        method: 'get'
+    })
+}
+export function failCheckUser(userId) {
+    return request({
+        url: `/cloud-admin/user/check-info/fail/${userId}`,
+        method: 'get'
+    })
+}
+
+
+
+
+
+export function getSystemDept(parmas) {
+    return request({
+        url: `/cloud-admin/system/dept/${parmas.pageNum}/${parmas.pageSize}`,
+        method: 'get'
+    })
+}
+
+export function deleteSystemDept(deptId) {
+    return request({
+        url: `/cloud-admin/system/dept/${deptId}`,
+        method: 'delete'
+    })
+}
+export function editSystemDept(parmas) {
+    return request({
+        url: `/cloud-admin/system/dept`,
+        method: 'put',
+        data:parmas
+    })
+}
+
+export function systemDeptAdd(parmas) {
+    return request({
+        url: `/cloud-admin/system/dept/add`,
+        method: 'post',
+        data:parmas
+    })
+}
+
+
+
+
+
+export function getSystemMember(parmas) {
+    return request({
+        url: `/cloud-admin/system/member/list/${parmas.pageNum}/${parmas.pageSize}/${parmas.state}`,
+        method: 'get'
+    })
+}
+
+export function memberEnable(memberId) {
+    return request({
+        url: `/cloud-admin/system/member/enable/${memberId}`,
+        method: 'get'
+    })
+}
+export function memberDisable(adminUserId) {
+    return request({
+        url: `/cloud-admin/system/member/disable/${adminUserId}`,
+        method: 'get'
+    })
+}
+export function memberDelete(adminUserId) {
+    return request({
+        url: `/cloud-admin/system/member/delete/${adminUserId}`,
+        method: 'get'
+    })
+}
+export function memberAdd(parmas) {
+    return request({
+        url: `/cloud-admin/system/member/add`,
+        method: 'post',
+        data:parmas
+    })
+}
+
+
+
+
+export function roleAdd(parmas) {
+    return request({
+        url: `/cloud-admin/system/role/add`,
+        method: 'post',
+        data:parmas
+    })
+}
+
+
+
+
+
+
+export function getSystemRole(parmas) {
+    return request({
+        url: `/cloud-admin/system/role/${parmas.pageNum}/${parmas.pageSize}`,
+        method: 'get',
+    })
+}
+
+
+
+export function deleteRole(roleId) {
+    return request({
+        url: `/cloud-admin/system/role/${roleId}`,
+        method: 'delete',
+    })
+}
+
+export function editRole(parmas) {
+    return request({
+        url: `/cloud-admin/system/role`,
+        method: 'put',
+        data:parmas
+    })
+}
+
+
+
+
+
+// 查询所有权限
+export function systemPermission(parmas) {
+    return request({
+        url: `/cloud-admin/system/permission/${parmas.pageNum}/${parmas.pageSize}`,
+        method: 'get',
+    })
+}
+
+
+export function deletesystemPermission(permissionId) {
+    return request({
+        url: `/cloud-admin/system/permission/${permissionId}`,
+        method: 'delete',
+    })
+}
+
+
+export function editSystemPermission(parmas) {
+    return request({
+        url: `/cloud-admin/system/permission`,
+        method: 'put',
+        data:parmas
+    })
+}

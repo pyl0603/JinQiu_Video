@@ -110,62 +110,13 @@ export const asyncRoutes = [
             meta: { title: '数据', icon: 'dashboard' }
         }]
     },
-    {
-        path: '/count',
-        component: Layout,
-        redirect: '/count/basketball/article',
-        name: '数据分析',
-        meta: { title: '数据分析', icon: 'dashboard', roles: ['ADMIN', 'DATA_ANALYSIS'] },
-        children: [{
-            path: 'basketball/article',
-            name: 'data',
-            component: () =>
-                import('@/views/dashboard/index'),
-            meta: { title: '篮球文章统计', icon: 'dashboard' }
-        },
-        {
-            path: 'basketball/video',
-            name: 'data',
-            component: () =>
-                import('@/views/dashboard/video'),
-            meta: { title: '篮球视频统计', icon: 'dashboard' }
-        },
-        {
-            path: 'football/article',
-            name: 'data',
-            component: () =>
-                import('@/views/dashboard/index'),
-            meta: { title: '足球文章统计', icon: 'dashboard' }
-        },
-        {
-            path: 'football/video',
-            name: 'data',
-            component: () =>
-                import('@/views/dashboard/video'),
-            meta: { title: '足球视频统计', icon: 'dashboard' }
-        },
-        {
-            path: 'push/record',
-            name: 'data',
-            component: () =>
-                import('@/views/push/record'),
-            meta: { title: '推送概览', icon: 'dashboard' }
-        }
-            // {
-            //     path: 'eva',
-            //     name: 'data',
-            //     component: () =>
-            //         import ('@/views/dashboard/eva'),
-            //     meta: { title: '评论统计', icon: 'dashboard'}
-            // }
-        ]
-    },
+
     {
         path: '/basketball',
         component: Layout,
         redirect: '/basketball/banner',
         name: '篮球应用',
-        meta: { title: '篮球应用', icon: 'example', roles: ['ADMIN', 'APPLICATION_FOOTBALL', 'COMMON_SETTING'] },
+        meta: { title: '篮球应用', icon: 'example',  },
         children: [
             {
                 path: 'banner',
@@ -207,21 +158,21 @@ export const asyncRoutes = [
                 name: 'circle',
                 component: () =>
                     import('@/views/circle/index'),
-                meta: { title: '圈子管理(管理)', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '圈子管理(管理)', icon: 'tree',}
             },
             {
                 path: 'live',
                 name: 'live',
                 component: () =>
                     import('@/views/live/index'),
-                meta: { title: '直播间设置(管理)', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '直播间设置(管理)', icon: 'tree',  }
             },
             {
                 path: 'channel',
                 name: 'channel',
                 component: () =>
                     import('@/views/channel/index'),
-                meta: { title: '频道调整(管理)', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '频道调整(管理)', icon: 'tree', }
             }
         ]
     },
@@ -230,7 +181,7 @@ export const asyncRoutes = [
         component: Layout,
         redirect: '/football/banner',
         name: '足球应用',
-        meta: { title: '足球应用', icon: 'example', roles: ['ADMIN', 'APPLICATION_FOOTBALL', 'COMMON_SETTING'] },
+        meta: { title: '足球应用', icon: 'example', },
         children: [
             {
                 path: 'banner',
@@ -272,21 +223,21 @@ export const asyncRoutes = [
                 name: 'circle',
                 component: () =>
                     import('@/views/circle/index'),
-                meta: { title: '圈子管理(管理)', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '圈子管理(管理)', icon: 'tree',  }
             },
             {
                 path: 'live',
                 name: 'live',
                 component: () =>
                     import('@/views/live/index'),
-                meta: { title: '直播间设置(管理)', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '直播间设置(管理)', icon: 'tree', }
             },
             {
                 path: 'channel',
                 name: 'channel',
                 component: () =>
                     import('@/views/channel/index'),
-                meta: { title: '频道调整(管理)', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '频道调整(管理)', icon: 'tree', }
             }
         ]
     },
@@ -297,7 +248,7 @@ export const asyncRoutes = [
         component: Layout,
         redirect: '/expert/banner',
         name: '专家应用',
-        meta: { title: '专家应用', icon: 'example', roles: ['ADMIN', 'APPLICATION_FOOTBALL', 'COMMON_SETTING'] },
+        meta: { title: '专家应用', icon: 'example',  },
         children: [
             {
                 path: 'banner',
@@ -321,14 +272,14 @@ export const asyncRoutes = [
         component: Layout,
         redirect: '/lives/index',
         name: '直播管理',
-        meta: { title: '直播管理', icon: 'example', roles: ['ADMIN', 'APPLICATION_FOOTBALL', 'COMMON_SETTING'] },
+        meta: { title: '直播管理', icon: 'example', },
         children: [
             {
                 path: 'channel',
                 name: 'channel',
                 component: () =>
                     import('@/views/channel/anchor'),
-                meta: { title: '频道管理', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '频道管理', icon: 'tree',  }
             },
             {
                 path: 'banner',
@@ -342,7 +293,7 @@ export const asyncRoutes = [
                 name: 'live',
                 component: () =>
                     import('@/views/live/index'),
-                meta: { title: '自建比赛直播间设置', icon: 'tree', roles: ['ADMIN', 'COMMON_SETTING'] }
+                meta: { title: '自建比赛直播间设置', icon: 'tree',  }
             },
             {
                 path: 'follow',
@@ -360,63 +311,13 @@ export const asyncRoutes = [
             },
         ]
     },
-    {
-        path: '/start',
-        component: Layout,
-        redirect: '/start',
-        name: '应用通用',
-        meta: { title: '应用通用(管理)', icon: 'example', roles: ['ADMIN', 'COMMON_SETTING'] },
-        children: [
-            // {
-            //     path: 'start',
-            //     name: '启动页设置',
-            //     component: () =>
-            //         import('@/views/start/index'),
-            //     meta: { title: '启动页设置', icon: 'table' }
-            // },
-            {
-                path: 'newPush',
-                name: 'newPush',
-                component: () =>
-                    import('@/views/newPush/index'),
-                meta: { title: '系统消息', icon: 'tree' }
-            },
-            {
-                path: 'rec',
-                name: 'rec',
-                component: () =>
-                    import('@/views/follow/rec'),
-                meta: { title: '推荐列表', icon: 'tree' }
-            },
-            {
-                path: 'sensitive',
-                name: 'sensitive',
-                component: () =>
-                    import('@/views/sensitive/index'),
-                meta: { title: '敏感词', icon: 'tree' }
-            },
-            {
-                path: 'protocol',
-                name: 'protocol',
-                component: () =>
-                    import('@/views/protocol/index'),
-                meta: { title: '协议文档', icon: 'tree' }
-            },
-            {
-                path: 'version',
-                name: 'version',
-                component: () =>
-                    import('@/views/version/index'),
-                meta: { title: '版本更新', icon: 'tree' }
-            },
-        ]
-    },
+
     {
         path: '/check',
         component: Layout,
         redirect: '/check/football/article',
         name: '内容审核',
-        meta: { title: '内容审核', icon: 'example', roles: ['ADMIN', 'CHECK_MEDIA'] },
+        meta: { title: '内容审核', icon: 'example',  },
         children: [
             {
                 path: 'expert',
@@ -476,42 +377,13 @@ export const asyncRoutes = [
             }
         ]
     },
-    {
-        path: '/checkUser',
-        component: Layout,
-        redirect: '/user',
-        name: '用户审核',
-        meta: { title: '用户审核', icon: 'example', roles: ['ADMIN', 'CHECK_USER'] },
-        children: [
-            {
-                path: 'user',
-                name: '用户',
-                component: () =>
-                    import('@/views/userCheck/index'),
-                meta: { title: '用户审核', icon: 'form' }
-            },
-            {
-                path: 'expert',
-                name: 'Tree',
-                component: () =>
-                    import ('@/views/userCheck/expert'),
-                meta: { title: '专家用户审核', icon: 'tree'}
-            },
-            {
-                path: 'anchor',
-                name: 'Tree',
-                component: () =>
-                    import ('@/views/userCheck/anchor'),
-                meta: { title: '主播审核', icon: 'tree'}
-            }
-        ]
-    },
+
     {
         path: '/activity',
         component: Layout,
         redirect: '/invitation',
         name: '活动',
-        meta: { title: '活动', icon: 'example', roles: ['ADMIN', 'CHECK_USER'] },
+        meta: { title: '活动', icon: 'example',  },
         children: [
             {
                 path: 'invitation',
@@ -527,7 +399,7 @@ export const asyncRoutes = [
         component: Layout,
         redirect: '/backups/department',
         name: '权限管理',
-        meta: { title: '管理权限', icon: 'example', roles: ['ADMIN', 'COMMON_MANAGER'] },
+        meta: { title: '管理权限', icon: 'example', },
         children: [
             // {
             //     path: 'index',
@@ -541,22 +413,22 @@ export const asyncRoutes = [
                 name: 'department',
                 component: () =>
                     import('@/views/department/index'),
-                meta: { title: '部门管理', icon: 'tree', roles: ['ADMIN'] }
+                meta: { title: '部门管理', icon: 'tree',}
             },
             {
                 path: 'child',
                 name: 'child',
                 component: () =>
                     import('@/views/department/child'),
-                meta: { title: '我的部门管理', icon: 'tree' }
+                meta: { title: '成员管理', icon: 'tree' }
             },
-            {
-                path: 'feedback',
-                name: 'feedback',
-                component: () =>
-                    import('@/views/feedback/index'),
-                meta: { title: '用户反馈', icon: 'form' }
-            },
+            // {
+            //     path: 'feedback',
+            //     name: 'feedback',
+            //     component: () =>
+            //         import('@/views/feedback/index'),
+            //     meta: { title: '用户反馈', icon: 'form' }
+            // },
             {
                 path: 'appUser',
                 name: 'appUser',
@@ -573,7 +445,194 @@ export const asyncRoutes = [
             }
         ]
     },
+    {
+        path: '/InformationMan',
+        component: Layout,
+        redirect: '/Information',
+        name: '资讯管理',
+        meta: { title: '资讯', icon: 'example', },
+        children: [
+            {
+                path: 'Information',
+                name: '资讯',
+                component: () =>
+                    import('@/views/Information/index'),
+                meta: { title: '资讯管理', icon: 'form' }
+            }
+       
+        ]
+    },
+    {
+        path: '/video',
+        component: Layout,
+        redirect: '/video',
+        name: '视频管理',
+        meta: { title: '视频管理', icon: 'example', },
+        children: [
+            {
+                path: 'index',
+                name: '视频',
+                component: () =>
+                    import('@/views/video/index'),
+                meta: { title: '视频审核', icon: 'form' }
+            },
+            {
+                path: 'videoSetting',
+                name: '推荐',
+                component: () =>
+                    import('@/views/video/videoSetting'),
+                meta: { title: '智能推荐', icon: 'form' }
+            },
+            {
+                path: 'collection',
+                name: '视频合集',
+                component: () =>
+                    import('@/views/video/collection'),
+                meta: { title: '视频合集管理', icon: 'form' }
+            },
+       
+        ]
+    },
 
+    {
+        path: '/checkUser',
+        component: Layout,
+        redirect: '/play',
+        name: '用户审核',
+        meta: { title: '用户审核', icon: 'example', },
+        children: [
+            {
+                path: 'play',
+                name: '用户',
+                component: () =>
+                    import('@/views/userCheck/index'),
+                meta: { title: '用户管理', icon: 'form' }
+            },
+            {
+                path: 'expert',
+                name: 'Tree',
+                component: () =>
+                    import ('@/views/userCheck/expert'),
+                meta: { title: '用户审核', icon: 'tree'}
+            },
+        ]
+    },
+    {
+        path: '/feedback',
+        component: Layout,
+        redirect: '/user',
+        name: '反馈管理',
+        meta: { title: '反馈管理', icon: 'example', },
+        children: [
+            {
+                path: 'user',
+                name: '用户',
+                component: () =>
+                    import('@/views/feedback/index'),
+                meta: { title: '播放反馈', icon: 'form' }
+            },
+            {
+                path: 'report',
+                name: 'Tree',
+                component: () =>
+                    import ('@/views/feedback/report'),
+                meta: { title: '处理举报', icon: 'tree'}
+            },
+        ]
+    },
+
+
+    {
+        path: '/push',
+        component: Layout,
+        redirect: '/notify',
+        name: '推送管理',
+        meta: { title: '推送管理', icon: 'example', },
+        children: [
+            {
+                path: 'notify',
+                name: '通知推送',
+                component: () =>
+                    import('@/views/push/notify'),
+                meta: { title: '通知推送', icon: 'form' }
+            },
+
+        ]
+    },
+    {
+        path: '/count',
+        component: Layout,
+        redirect: '/count/basketball/article',
+        name: '数据分析',
+        meta: { title: '数据分析', icon: 'dashboard',  },
+        children: [
+        {
+            path: 'push/record',
+            name: 'data',
+            component: () =>
+                import('@/views/push/record'),
+            meta: { title: '推送概览', icon: 'dashboard' }
+        }
+            // {
+            //     path: 'eva',
+            //     name: 'data',
+            //     component: () =>
+            //         import ('@/views/dashboard/eva'),
+            //     meta: { title: '评论统计', icon: 'dashboard'}
+            // }
+        ]
+    },
+    {
+        path: '/start',
+        component: Layout,
+        redirect: '/start',
+        name: '应用通用',
+        meta: { title: '应用通用(管理)', icon: 'example',  },
+        children: [
+            // {
+            //     path: 'start',
+            //     name: '启动页设置',
+            //     component: () =>
+            //         import('@/views/start/index'),
+            //     meta: { title: '启动页设置', icon: 'table' }
+            // },
+            // {
+            //     path: 'newPush',
+            //     name: 'newPush',
+            //     component: () =>
+            //         import('@/views/newPush/index'),
+            //     meta: { title: '系统消息', icon: 'tree' }
+            // },
+            // {
+            //     path: 'rec',
+            //     name: 'rec',
+            //     component: () =>
+            //         import('@/views/follow/rec'),
+            //     meta: { title: '推荐列表', icon: 'tree' }
+            // },
+            // {
+            //     path: 'sensitive',
+            //     name: 'sensitive',
+            //     component: () =>
+            //         import('@/views/sensitive/index'),
+            //     meta: { title: '敏感词', icon: 'tree' }
+            // },
+            // {
+            //     path: 'protocol',
+            //     name: 'protocol',
+            //     component: () =>
+            //         import('@/views/protocol/index'),
+            //     meta: { title: '协议文档', icon: 'tree' }
+            // },
+            {
+                path: 'version',
+                name: 'version',
+                component: () =>
+                    import('@/views/version/index'),
+                meta: { title: '版本管理', icon: 'tree' }
+            },
+        ]
+    },
 
     // 404 page must be placed at the end !!!
     { path: '*', redirect: '/404', hidden: true }

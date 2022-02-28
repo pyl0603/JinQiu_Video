@@ -402,3 +402,33 @@ export function refreshMatch(data) {
         method: 'post'
     })
 }
+
+
+
+
+
+
+
+export function getVersionList(parmas) {
+    return request({
+        url: `/cloud-admin/version/list/${parmas.pageNum}/${parmas.pageSize}/${parmas.osType}`,
+        method: 'get'
+    })
+}
+
+
+export function VersionAdd(parmas) {
+    return request({
+        url: `/cloud-admin/version/add`,
+        method: 'post',
+        data:parmas
+    })
+}
+
+export function VersionUpdate(parmas) {
+    return request({
+        url: `/cloud-admin/version/update`,
+        method: 'put',
+        data:parmas
+    })
+}

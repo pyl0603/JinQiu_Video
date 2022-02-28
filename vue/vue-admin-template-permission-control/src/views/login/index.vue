@@ -29,19 +29,22 @@
           <svg-icon icon-class="password"/>
         </span>
         <el-input
-          :key="passwordType"
           ref="password"
-          v-model="loginForm.password"
-          v-inputNotCHS
-          :type="passwordType"
-          placeholder="请输入密码"
-          name="password"
+          v-model="loginForm.code"
+          placeholder="请输入验证码"
           tabindex="2"
           auto-complete="on"
-          @keyup.enter.native="handleLogin"
         />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
+        <!-- @click="showPwd" -->
+        <span class="show-pwd" >
+          <!-- <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/> -->
+                 <el-button
+          type="primary"
+          plain
+          @click="VerificationCode"
+          :disabled="!ShowTime"
+          >{{ ShowTime ? "获取验证码" : `${Time}后获取` }}</el-button
+        >
         </span>
       </el-form-item>
       <el-button
@@ -57,29 +60,30 @@
 <script>
 import { validUsername } from "@/utils/validate";
 import { removeToken } from '@/utils/auth'
+import { GetVerification } from "@/api/user";
+
 
 export default {
   name: "Login",
   data() {
       var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入账号'));
-        } else {
           callback();
-        }
       };
       var validatePass2 = (rule, value, callback) => {
-         if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
+        //  if (value === '') {
+          // callback(new Error('请输入密码'));
+        // } else {
           callback();
-        }
+        // }
       };
     return {
+      ShowTime: true,
+      Time: 60,
       loginForm: {
         // 15705929646
-        username: "",
-        password: ""
+        username: "15270332428",
+        password: "",
+        code:""
       },
       loginRules: {
         username: [
@@ -103,6 +107,17 @@ export default {
     }
   },
   methods: {
+        VerificationCode() {
+      let timer;
+      this.ShowTime = false;
+      timer = setInterval(() => {
+        this.Time--;
+        this.Time < 0 ? (this.ShowTime = true) : this.ShowTime;
+        this.ShowTime ? clearInterval(timer) : "";
+      }, 1000);
+
+      GetVerification(this.loginForm.username);
+    },
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";
@@ -115,20 +130,21 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) {
+        // if (valid) {
           this.loading = true;
           this.$store.dispatch("user/login", this.loginForm).then(() => {
-              this.$router.push({ path: this.redirect || "/" });
+                            this.$router.push("/");
+              console.log('ok');
               this.loading = false;
             })
             .catch(() => {
               this.loginForm.password = ''
               this.loading = false;
             });
-        } else {
-          console.log("error submit!!")
-          return false
-        }
+        // } else {
+        //   console.log("error submit!!")
+        //   return false
+        // }
       })
     }
   },

@@ -6,6 +6,7 @@ const getters = {
     name: state => state.user.name,
     roles: state => state.user.roles,
     uid:state => state.user.uid,
+    userInfo:state => state.user.userInfo,
     permission_routes: state => state.permission.routes,
     total: state => state.paging.total,
     isPaging: state => state.paging.isPaging,
